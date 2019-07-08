@@ -1,0 +1,121 @@
+body {
+	font-family: Edelsans;
+	color: #fff;
+    background: #31343d;
+	background-image: url(bg0.png);
+	background-repeat: repeat-x; 
+	background-attachment: fixed;
+	background-position: bottom; 
+}
+footer{
+	height: 150px;
+}
+@font-face {
+    font-family: Kelson;
+    src: url(font/Kelson_Sans_Regular.otf);
+}
+@font-face {
+    font-family: Edelsans;
+    src: url(font/edelsans_regular.otf);
+}
+
+.brand, .brand:focus, .brand:hover{
+	text-decoration: none;
+	color: #fff;
+	letter-spacing: 5px;
+	text-shadow: 0px 1px 10px #8aaeff;
+}
+
+.title {
+	color: #31343d;
+	background: #fff;
+	text-transform: uppercase;
+}
+.subtitle{
+	background: #8b8b90;
+	text-transform: uppercase;
+}
+h5{
+	margin: 0px;
+}
+a{
+	color: #95e3f6;
+}
+
+.text-light{
+	color: #bebebe!important;
+}
+
+/*sidebar navigation*/
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+.bt-div{
+	border-bottom: #565656 1px solid;
+}
+.sidenav form {
+    padding: 8px 32px 8px 32px;
+    transition: 0.3s;
+}
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 0px;
+    font-size: 36px;
+    margin-right: 15px;
+}
+#main {display: none;}
+#main {
+	float: left;
+    transition: margin-right .5s;
+    
+}
+a.openNav {
+    font-size: 30px;
+    color: #ffffff;
+    text-decoration: none;
+}
+.sidenav .nav-link {
+	font-size: 13px;
+	font-weight: bold;
+}
+.mob-ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+.sidenav li{
+	padding: 0 3px !important;
+    position: relative;
+}
+.sidenav li a {
+    padding-bottom: 15px;
+    text-transform: uppercase;
+}
+.sidenav li form {
+    padding-bottom: 15px;
+    text-transform: uppercase;
+}
+.sidenav ul li:hover .nav-link {
+    color: #008ba3;
+}
