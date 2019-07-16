@@ -42,7 +42,7 @@ class Project {
 		html += '<div id="carousel_'+this.name+'" class="carousel slide col-lg-7 py-3 mt-2 mb-auto" data-interval="false">'+
 			  '<ol class="carousel-indicators">';
 		
-		let imgUrl = imgBaseUrl+this.name+'/'
+		let imgUrl = imgBaseUrl+this.name.replace(/ /g,"_")+'/'
 		let sliderCount = this.imgCount;	//imgCount+videoCount(1)
 		if(this.videoUrl!=null) sliderCount++;
 		
