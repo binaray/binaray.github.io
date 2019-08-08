@@ -137,7 +137,7 @@ $(document).ready(function(){
 	'Singapore University of Technology and Design',
 	['c++','opengl','project'],
 	'Ongoing Graphics and Visualization project. <br>A 3D visual representation of a vector field built using a unique particle system, to simulate wind speed or magnetic field representations.',
-	'1',null,
+	'2',null,
 	null,
 	null));
 	
