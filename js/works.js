@@ -129,7 +129,7 @@ $(document).ready(function(){
 	'Singapore University of Technology and Design',
 	['unity','game','project'],
 	'Ongoing Game Design project.<br>In the far outskirts of a town, lies the fallen ruins of a once great factory, HamuHamu Factory. Rebuild HamuHamu to a major hub for production in a world where rodents, critters and household pets stand on two feet and act as a functional capitalistic society. Manage money, hire workers, delegate tasks and responsibilities, manage materials, facilities (workstations) to maximise factory earnings and efficiency.',
-	'1',null,
+	'3',null,
 	null,
 	['Programming: Lim Yuet Tung','Music: Gu Zhiyao']));
 	
@@ -144,7 +144,7 @@ $(document).ready(function(){
 	data.push(new Project('Valterego','Ongoing',
 	'Entrepreneurship',
 	['startup','ar','machine learning','nlp','web'],
-	'An ambitious project which started from a vision to build a better virtual pet. After vetting with industries outside, it became a data collection tool for therapists and administrators.',
+	'An ambitious project which started from a vision to build a better virtual pet. After vetting with industries outside, it evolved to an engagement platform serving as a data collection tool for therapists and administrators.',
 	'2',null,
 	null,
 	['Unity Programming: Lim Yuet Tung','Machine Learning: Foo Lin Geng','IoT: Samson Choo']));
