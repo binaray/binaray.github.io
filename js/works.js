@@ -129,7 +129,7 @@ $(document).ready(function(){
 	'Singapore University of Technology and Design',
 	['unity','game','project'],
 	'Ongoing Game Design project.<br>In the far outskirts of a town, lies the fallen ruins of a once great factory, HamuHamu Factory. Rebuild HamuHamu to a major hub for production in a world where rodents, critters and household pets stand on two feet and act as a functional capitalistic society. Manage money, hire workers, delegate tasks and responsibilities, manage materials, facilities (workstations) to maximise factory earnings and efficiency.',
-	'3',null,
+	'3','https://www.youtube.com/embed/Rw23uZywoB4',
 	null,
 	['Programming: Lim Yuet Tung','Music: Gu Zhiyao']));
 	
