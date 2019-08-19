@@ -125,29 +125,29 @@ $(document).ready(function(){
 	//--init display
 	let data=[];
 		
-	data.push(new Project('HamuHamu Factory','Ongoing',
+	data.push(new Project('HamuHamu Factory','2019/08/16',
 	'Singapore University of Technology and Design',
-	['unity','game','project'],
-	'Ongoing Game Design project.<br>In the far outskirts of a town, lies the fallen ruins of a once great factory, HamuHamu Factory. Rebuild HamuHamu to a major hub for production in a world where rodents, critters and household pets stand on two feet and act as a functional capitalistic society. Manage money, hire workers, delegate tasks and responsibilities, manage materials, facilities (workstations) to maximise factory earnings and efficiency.',
+	['c#','unity','game','project'],
+	'Game Design project.<br>In the far outskirts of a town, lies the fallen ruins of a once great factory, HamuHamu Factory. Rebuild HamuHamu to a major hub for production in a world where rodents, critters and household pets stand on two feet and act as a functional capitalistic society.',
 	'3','https://www.youtube.com/embed/Rw23uZywoB4',
-	null,
+	{Download:'https://www.dropbox.com/sh/7fvmdzauc73eu4e/AAA0TtI5--aE4BNtD7YeqV-Xa?dl=0'},
 	['Programming: Lim Yuet Tung','Music: Gu Zhiyao']));
 	
-	data.push(new Project('Visualization of a 3D Vector Field','Ongoing',
+	data.push(new Project('Visualization of a 3D Vector Field','2019/08/16',
 	'Singapore University of Technology and Design',
 	['c++','opengl','project'],
-	'Ongoing Graphics and Visualization project. <br>A 3D visual representation of a vector field built using a unique particle system, to simulate wind speed or magnetic field representations.',
+	'Graphics and Visualization project. <br>A 3D visual representation of a vector field built using a unique particle system, to simulate wind speed or magnetic field representations.',
 	'2',null,
 	null,
 	null));
 	
 	data.push(new Project('Valterego','Ongoing',
 	'Entrepreneurship',
-	['startup','ar','machine learning','nlp','web'],
-	'An ambitious project which started from a vision to build a better virtual pet. After vetting with industries outside, it evolved to an engagement platform serving as a data collection tool for therapists and administrators.',
+	['c#','unity','startup','ar','machine learning','nlp','web'],
+	'An entrepreneurship project which started from a vision to build a better virtual pet. After vetting with industries outside, it evolved to an engagement platform serving as a data collection tool for therapists and administrators.',
 	'2',null,
 	null,
-	['Unity Programming: Lim Yuet Tung','Machine Learning: Foo Lin Geng','IoT: Samson Choo']));
+	['Unity Programming: Lim Yuet Tung','Machine Learning: Foo Lin Geng','Assets, UI/UX: Lim Kenjyi','IoT: Samson Choo']));
 	
 	data.push(new Project('Pipsqueak Marketplace','2018/12/29',
 	'Entrepreneurship',
@@ -159,7 +159,7 @@ $(document).ready(function(){
 	
 	data.push(new Project('Augmented Reality IoT (ARIOT)','2018/09/30',
 	'Singapore University of Technology and Design',
-	['ar','hackathon'],
+	['c#','unity','ar','hackathon'],
 	'A smart AR companion which helps controls IoT devices in your home.',
 	'1','https://www.youtube.com/embed/GbTqTy4oVDY',
 	{Information:'https://devpost.com/software/ariot-kdvt9m',Sourcecode:'https://github.com/binaray/ARCompa'},
@@ -183,7 +183,7 @@ $(document).ready(function(){
 	
 	data.push(new Project('Extreme Pony Escape','2018/07/08',
 	'Singapore University of Technology and Design',
-	['unity','game','project'],
+	['c#','unity','game','project'],
 	'A Unity-based multiplayer survival which players are required to cooperate to survive and reach the end.',
 	'1','https://www.youtube.com/embed/MQ-OrJQVeTs',
 	null,
@@ -191,7 +191,7 @@ $(document).ready(function(){
 	
 	data.push(new Project('Letters4','2018/07/08',
 	'Singapore University of Technology and Design',
-	['game','project'],
+	['c#','unity','game','project'],
 	'Project for Material Things in Social Life.<br>Why do people write letters and for what purposes? To whom, how often and what is conveyed by them; what do people feel when writing or reading letters and what do letters mean to a writer or a reader. the story of an old man through the personification of letters he has received through his life; each recounting their experiences.',
 	'2',null,
 	{Download:'https://www.dropbox.com/sh/60bj9ocmsqysm9p/AADiGhwt6N_D-aW7rQYNux4da?dl=0'},
