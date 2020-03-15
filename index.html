@@ -8,6 +8,21 @@
 	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/binaray.css">
+	<style>
+	@keyframes rotateMask {
+	  0% {clip-path: polygon(50% 1%, 92.3% 25%, 92.3% 75%, 50% 99%, 7.7% 75%, 7.7% 25%);}
+	  5% {clip-path: polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%);}
+	  50% {clip-path: polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%);}
+	  55% {clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);}
+	  100% {clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);}
+	}
+	#profile-pic{
+		width:150px;
+		height:150px;
+		clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
+		animation: rotateMask 4s linear 1s infinite alternate;
+	}
+	</style>
   </head>
   <body>
 	<div class="container">
@@ -27,27 +42,26 @@
 		<div class="row">PROFILE&nbsp|&nbsp<a href="works.html">WORKS</a>&nbsp|&nbsp<a href="gallery.html">GALLERY</a></div>
 		
 		<div class="row"><div class="col-12 title text-center pt-1"><h5>Profile</h5></div></div>
-		<div class="row border pt-3 pb-4">
+		<div class="row border pt-3 pb-4 content">
 			<div class="col-md-4 text-md-right text-center my-1">
-				<img src="resources/site/binaray.png" style="width: 200px;" class="p-2">
+				<img id="profile-pic" src="resources/site/fish.png">
 			</div>
 			<div class="col-md-8 align-self-center text-md-left text-center">
-				・Ray
-				<div class="px-3 pl-md-5">
-				I mainly work as a programmer; swapping to creative roles when needed.<br>
-				When free, I enjoy doing illustrations and creative media research.
-				</div>
+				Ray Cheng<br>
+				Software Engineer | Creative Technologist | Illustrator 
 			</div>
+			
+			
 			
 			<div class="col-12 px-5 py-4">
 				<div class="row justify-content-center">
 					<div class="col-lg-10 border-bottom">
-						・SKILLS:<br>
+						SKILLS:<br>
 					</div>
 				</div>
 				<div class="row justify-content-center mt-1 mb-1">
 					<div class="col-lg-3 text-lg-right text-left">
-						Programming|Markup:
+						Programming Markup:
 					</div>
 					<div class="col-lg-7 text-light">
 						C, C++, C#, Java, PHP, Processing, Python, HTML, CSS, JS, SQL

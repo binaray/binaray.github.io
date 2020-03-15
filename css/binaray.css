@@ -2,11 +2,30 @@ body {
 	font-family: Edelsans;
 	color: #fff;
     background: #31343d;
-	background-image: url(bg0.png);
+	background-image: url(bg1.png);
 	background-repeat: repeat-x; 
 	background-attachment: fixed;
 	background-position: bottom; 
+	-webkit-animation:loopBgSet 50s linear infinite;
+	animation:loopBgSet 50s linear infinite
 }
+@-webkit-keyframes loopBgSet {
+ 0% {
+  background-position:0 bottom
+ }
+ to {
+  background-position:985px bottom
+ }
+}
+@keyframes loopBgSet {
+ 0% {
+  background-position:0 bottom
+ }
+ to {
+  background-position:985px bottom
+ }
+}
+
 footer{
 	height: 150px;
 }
@@ -44,6 +63,10 @@ a{
 
 .text-light{
 	color: #bebebe!important;
+}
+
+.content{
+	background: #68698e38;
 }
 
 /*sidebar navigation*/
