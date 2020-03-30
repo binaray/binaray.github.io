@@ -124,14 +124,30 @@ class Project {
 $(document).ready(function(){
 	//--init display
 	let data=[];
-		
+	
+	data.push(new Project('Future Hybrid Highrise Commune','TBC',
+	'Venice Biennale 2020, Singapore Pavilion',
+	['c#','unity','ar','exhibition'],
+	'Individual user participate as prospective tenants in the launch of a high-rise commune. They express wishes regarding their own apartment, together with numerous other future neighbours. The wishes are based on a layout that allows numerous apartment sizes and life-styles to inhabit them. Having many parties involved though requires a moderation and negotiation process.',
+	'1',null,
+	null,
+	['Direction: Michael Budig, Oliver Heckmann','Programming: Ray Cheng','AR: Clement Lork']));
+
+	data.push(new Project("c'est mignon",'Ongoing',
+	'Personal',
+	['php','wordpress'],
+	'Dynamic wordpress website for private circle members to feature art, merchandise and events.',
+	'1',null,
+	null,
+	null));
+	
 	data.push(new Project('HamuHamu Factory','2019/08/16',
 	'Singapore University of Technology and Design',
 	['c#','unity','game','project'],
 	'Game Design project.<br>In the far outskirts of a town, lies the fallen ruins of a once great factory, HamuHamu Factory. Rebuild HamuHamu to a major hub for production in a world where rodents, critters and household pets stand on two feet and act as a functional capitalistic society.',
 	'3','https://www.youtube.com/embed/Rw23uZywoB4',
 	{Download:'https://www.dropbox.com/sh/7fvmdzauc73eu4e/AAA0TtI5--aE4BNtD7YeqV-Xa?dl=0'},
-	['Programming: Lim Yuet Tung','Music: Gu Zhiyao']));
+	['Creative Director: Ray Cheng','Programming: Lim Yuet Tung','Music: Gu Zhiyao']));
 	
 	data.push(new Project('Visualization of a 3D Vector Field','2019/08/16',
 	'Singapore University of Technology and Design',
@@ -141,21 +157,21 @@ $(document).ready(function(){
 	null,
 	null));
 	
-	data.push(new Project('Valterego','Ongoing',
+	data.push(new Project('Valterego','2019/09/09',
 	'Entrepreneurship',
 	['c#','unity','startup','ar','machine learning','nlp','web'],
 	'An entrepreneurship project which started from a vision to build a better virtual pet. After vetting with industries outside, it evolved to an engagement platform serving as a data collection tool for therapists and administrators.',
 	'2',null,
 	null,
-	['Unity Programming: Lim Yuet Tung','Machine Learning: Foo Lin Geng','Assets, UI/UX: Lim Kenjyi','IoT: Samson Choo']));
+	['Unity Programming: Lim Yuet Tung, Ray Cheng','Machine Learning: Foo Lin Geng','Assets, UI/UX: Lim Kenjyi','IoT: Samson Choo']));
 	
-	data.push(new Project('Pipsqueak Marketplace','2018/12/29',
+	data.push(new Project('Pipsqueak Marketplace','2019/12/29',
 	'Entrepreneurship',
 	['e-commerce','startup','web'],
 	'Electrical components, semiconductors, project parts and materials are often sought for school projects. Through shipping offshore and bulk purchasing, Pipsqueak marketplace aims to bring these things to students at lower prices.',
 	'3',null,
-	{Website:'https://sutd.pipsqueak.sg/'},
-	['CEO: Chester Tan','COO: Estelle Teo','CMO: Michael Sebastian']));
+	null,
+	['CEO: Chester Tan','CTO: Ray Cheng','COO: Estelle Teo','CMO: Michael Sebastian']));
 	
 	data.push(new Project('Augmented Reality IoT (ARIOT)','2018/09/30',
 	'Singapore University of Technology and Design',
@@ -163,7 +179,7 @@ $(document).ready(function(){
 	'A smart AR companion which helps controls IoT devices in your home.',
 	'1','https://www.youtube.com/embed/GbTqTy4oVDY',
 	{Information:'https://devpost.com/software/ariot-kdvt9m',Sourcecode:'https://github.com/binaray/ARCompa'},
-	['Programming: Lim Yuet Tung','Microcontroller: Foo Lin Geng']));
+	['Programming: Lim Yuet Tung','Assets: Ray Cheng','Microcontroller: Foo Lin Geng']));
 	
 	data.push(new Project('Research on the Feasibility of High Resolution 3DCG Models','2018/09/09',
 	'Singapore University of Technology and Design',
@@ -187,7 +203,7 @@ $(document).ready(function(){
 	'A Unity-based multiplayer survival which players are required to cooperate to survive and reach the end.',
 	'1','https://www.youtube.com/embed/MQ-OrJQVeTs',
 	null,
-	['Networking: Tan Ting Yu','Music: Gu Zhiyao']));
+	['Creative Director and Programming: Ray Cheng','Networking: Tan Ting Yu','Music: Gu Zhiyao']));
 	
 	data.push(new Project('Letters4','2018/07/08',
 	'Singapore University of Technology and Design',
@@ -195,7 +211,7 @@ $(document).ready(function(){
 	'Project for Material Things in Social Life.<br>Why do people write letters and for what purposes? To whom, how often and what is conveyed by them; what do people feel when writing or reading letters and what do letters mean to a writer or a reader. the story of an old man through the personification of letters he has received through his life; each recounting their experiences.',
 	'2',null,
 	{Download:'https://www.dropbox.com/sh/60bj9ocmsqysm9p/AADiGhwt6N_D-aW7rQYNux4da?dl=0'},
-	['Programming: Dominic Ong','Story: Anirudh, Dalvi']));
+	['Creative Director: Ray Cheng','Programming: Dominic Ong','Story: Anirudh, Dalvi']));
 	
 	data.push(new Project('AP1D Travel Planner','2018/03/03',
 	'Singapore University of Technology and Design',
@@ -203,7 +219,7 @@ $(document).ready(function(){
 	'A travel planner android app which calculates and determines the mode of transportation based on destination and budget.',
 	'1',null,
 	null,
-	['Algorithm: Yu Jin','Maps: Lim Kenjyi']));
+	['UI/UX: Ray Cheng','Algorithm: Yu Jin','Maps: Lim Kenjyi']));
 	
 	data.push(new Project('Ori','2016/06/09',
 	'Game Design Club, Singapore University of Technology and Design',
@@ -211,12 +227,12 @@ $(document).ready(function(){
 	'One of my very first game projects. A small exploration game created using Gamemaker Studio featuring stop-motion origami photo assets.',
 	'2',null,
 	null,
-	['Programming: Lim Yuet Tung']));
+	['Creative Director: Ray Cheng','Programming: Lim Yuet Tung']));
 	
 	data.push(new Project('Dynamic Website Design','2015/04/15',
 	'Kumamoto National College of Technology',
 	['web','project','wordpress'],
-	'One of my very first web projects. A dynamic website template made using wordpress allowing administrators to create and manage pages easily. Isn\'t it cute?',
+	'One of my very first web projects. A dynamic website template made using wordpress allowing administrators to create and manage pages easily.',
 	'3',null,
 	{Download : 'https://www.dropbox.com/sh/jndtz5votx6dc9a/AAAeWlu4i9MxYTSdppkfaOa-a?dl=0'},
 	null));
