@@ -128,17 +128,17 @@ $(document).ready(function(){
 	data.push(new Project('Future Hybrid Highrise Commune','TBC',
 	'Venice Biennale 2020, Singapore Pavilion',
 	['c#','unity','ar','exhibition'],
-	'Individual user participate as prospective tenants in the launch of a high-rise commune. They express wishes regarding their own apartment, together with numerous other future neighbours. The wishes are based on a layout that allows numerous apartment sizes and life-styles to inhabit them. Having many parties involved though requires a moderation and negotiation process.',
-	'1',null,
+	'Individual users participate as prospective tenants in the launch of a high-rise commune. Expressing wishes regarding their own apartment, together with numerous other future neighbours, these wishes agglomerate on a layout that allows numerous apartment sizes and life-styles to inhabit them.',
+	'2',null,
 	null,
 	['Direction: Michael Budig, Oliver Heckmann','Programming: Ray Cheng','AR: Clement Lork']));
 
 	data.push(new Project("c'est mignon",'Ongoing',
 	'Personal',
-	['php','wordpress'],
-	'Dynamic wordpress website for private circle members to feature art, merchandise and events.',
+	['php','wordpress','web'],
+	'Ongoing project to develop a customized wordpress website for circle members to feature and post art, merchandise and events.',
 	'1',null,
-	null,
+	{ Instagram:'https://www.instagram.com/mvmc_atelier/'},
 	null));
 	
 	data.push(new Project('HamuHamu Factory','2019/08/16',
@@ -220,6 +220,14 @@ $(document).ready(function(){
 	'1',null,
 	null,
 	['UI/UX: Ray Cheng','Algorithm: Yu Jin','Maps: Lim Kenjyi']));
+	
+	data.push(new Project('Illuminator Exhibit','2017/11/08',
+	'SUTD Nightfest',
+	['mvmc','installation','exhibit'],
+	'A light box installation featuring modified works from our art club, Modern Visual Media Circle',
+	'3',null,
+	null,
+	['Original work: Wu Yufei','Composition: Ray Cheng','Production: Chester Tan, Lim Kenjyi']));
 	
 	data.push(new Project('Ori','2016/06/09',
 	'Game Design Club, Singapore University of Technology and Design',
