@@ -61,7 +61,7 @@
 	<div id="message" class="modal_window">
 		<div id="message_window_header" class="pt-3" style="height:64px">
 			<div class="pl-3 float-left">
-				<a id="message_topic_button" class="a_btn_modal" href="#" onclick="toggleMessageTopicsMenu('message_topic_button')"><h3>Topics Loading--</h3></a>
+				<a id="message_topic_button" class="a_btn_modal" href="#" onclick="toggleMessageTopicsMenu('message_topic_button')"><h3>Topics Loading--<div class="d-inline">v</div></h3></a>
 			</div>
 			<div class="pr-3 float-right"><a class="a_btn_modal" href="#closed" onclick="setModalState(null)"><h3>-</h3></a></div>
 		</div>
@@ -76,9 +76,15 @@
 			<a class="a_btn_modal" href="#closed" onclick="setModalState(null)"><h4>water</h4></a>
 		</div>
 		<ul class="message_list">
-			<li class="message left appeared">
-				<div class="text_wrapper">
-					<div class="text">Sorry! Watson service could not reply</div>
+			<li class="message_left appeared">
+				<div class="message_wrapper">
+					<div class="text">Biennalebienallesbienalenbielbluiblulblub</div>
+				</div>
+				<div class="message_wrapper">
+					<div class="text">Biennalebienallesbienalenbielbluiblulblub</div>
+				</div>
+				<div class="message_wrapper">
+					<div class="text">Biennalebienallesbienalenbielbluiblulblub</div>
 				</div>
 			</li>
 		</ul>
@@ -600,12 +606,12 @@ const rightSidebarSize = 260;
 const navButtonOffset = 50;
 function navSetEnabled(enabled=true){
 	if (enabled) {
-		document.getElementById('right-sidebar').style.left = (ww-rightSidebarSize)+"px";
-		document.getElementById('nav_controls').style.left = (ww-rightSidebarSize-navButtonOffset)+"px";
+		document.getElementById('right-sidebar').style.right = "0";
+		document.getElementById('nav_controls').style.right = (rightSidebarSize+10)+"px";
 	}
 	else{
-		document.getElementById('right-sidebar').style.left = ww+"px";
-		document.getElementById('nav_controls').style.left = (ww-navButtonOffset)+"px";	
+		document.getElementById('right-sidebar').style.right = (-rightSidebarSize)+"px";
+		document.getElementById('nav_controls').style.right = "10px";	
 	}
 }
 function toggleMenu(menuButtonId,forceState = null){
