@@ -8,13 +8,14 @@
 <link rel="stylesheet" href="css/questions.css">
 </head>
 <body>
+<div id="body">
 	<div id="vis-container">
 		<canvas id="vis">Error, canvas is not supported</canvas>
 		<h2 id="title" class="p-4">How will we live together?</h2>
-		<div id="left-sidebar" class="h-border-right">
+		<div id="left-sidebar" class="hide_scroll h-border-right">
 			some header here
 		</div>
-		<div id="right-sidebar">
+		<div id="right-sidebar" class="hide_scroll">
 			<h2 class="p-3">&nbsp</h2>
 			<h5 id="inputCount" class="m-0">0</h5>
 			<div class="text pb-2">Participants & counting...</div>
@@ -83,9 +84,11 @@
 				<div class="message_wrapper">
 					<div class="text">Biennalebienallesbienalenbielbluiblulblub</div>
 				</div>
+			</li>
+			<li class="message_right appeared">
 				<div class="message_wrapper">
 					<div class="text">Biennalebienallesbienalenbielbluiblulblub</div>
-				</div>
+				</div>				
 			</li>
 		</ul>
 		<div class="p-3 clearfix" style="height:100px">
@@ -103,7 +106,7 @@
 	<div id="menu_button_container">
 		<a id="menu_button" class="a_btn" href="#open" onclick="toggleMenu('menu_button')"><h3>+</h2></a>
 	</div>
-
+</div>
 <script src="js/canvas-txt.js"></script>
 <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 <script src="https://unpkg.com/dayjs@1.8.21/plugin/utc.js"></script>
@@ -771,10 +774,10 @@ function scrollEvent(){
 			dolly_y += 100;
 	}
 }
-window.onscroll = function() { scrollEvent(); };
-window.onwheel = function(event){
-	event.preventDefault();
-	scrollEvent();
+document.getElementById('vis-container').onscroll = function(event) { scrollEvent(event); };
+document.getElementById('vis-container').onwheel = function(event){
+	//event.preventDefault();
+	scrollEvent(event);
 };
 
 </script>
