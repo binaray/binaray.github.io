@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="css/vis.css">
 <link rel="stylesheet" href="css/message.css">
 <link rel="stylesheet" href="css/questions.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 <div id="body">
@@ -52,6 +53,7 @@
 		</div>
 	</div>
 	<div id="nav_controls" class="pb-5">
+		<a id="menu_button" class="a_btn pb-3" href="#open" onclick="toggleMenu('menu_button')"><i class="material-icons icon mb-3">menu_open</i></a>
 		<a class="a_btn" href="#" onclick="buildingZoom(0.5)"><h3>+</h2></a>
 		<hr>
 		<a class="a_btn" href="#" onclick="buildingZoom(-0.5)"><h3>-</h2></a>
@@ -79,32 +81,25 @@
 		<ul class="message_list">
 			<li class="message_left appeared">
 				<div class="message_wrapper">
-					<div class="text">Biennalebienallesbienalenbielbluiblulblub</div>
-				</div>
-				<div class="message_wrapper">
-					<div class="text">Biennalebienallesbienalenbielbluiblulblub</div>
+					<input class="message_reply" value="I am a reply" disabled>
+					<div class="messsage_text pt-1">Biennalebienallesbienalenbielbluiblulblub</div>
 				</div>
 			</li>
 			<li class="message_right appeared">
 				<div class="message_wrapper">
-					<div class="text">Biennalebienallesbienalenbielbluiblulblub</div>
+					<div class="messsage_text">Biennalebienallesbienalenbielbluiblulblub</div>
 				</div>				
 			</li>
 		</ul>
 		<div class="p-3 clearfix" style="height:100px">
 			<div class="message_input_wrapper">
-				<input class="message_input" placeholder="Type your message here...">
-			</div>
-			<div class="send_button_container">
-				<div id="send_button" class="send_button">
+				<input class="message_input" onkeyup="keyUpProcessMessage(e)" placeholder="Type your message here...">
+				<a id="send_button" class="a_btn send_button" onclick="processMessage()">
 					<i class="material-icons icon">send</i>
-				</div>
+				</a>
 			</div>
 		</div>
 	</div>
-	</div>
-	<div id="menu_button_container">
-		<a id="menu_button" class="a_btn" href="#open" onclick="toggleMenu('menu_button')"><h3>+</h2></a>
 	</div>
 </div>
 <script src="js/canvas-txt.js"></script>
@@ -622,24 +617,24 @@ function toggleMenu(menuButtonId,forceState = null){
 	if (forceState!=null){
 		if (forceState=='close') {
 			menuButton.href='#closed';
-			menuButton.children[0].innerHTML = "+";
+			menuButton.children[0].style.transform = "rotate(0deg)";
 			navSetEnabled(false);
 		}
 		else {
 			menuButton.href='#open';
-			menuButton.children[0].innerHTML = "-";
+			menuButton.children[0].style.transform = "rotate(180deg)";
 			navSetEnabled(true);
 		}
 	}
 	else{		
 		if (menuButton.getAttribute("href")=='#open') {
 			menuButton.href='#closed';
-			menuButton.children[0].innerHTML = "+";
+			menuButton.children[0].style.transform = "rotate(0deg)";
 			navSetEnabled(false);
 		}
 		else{
 			menuButton.href='#open';
-			menuButton.children[0].innerHTML = "-";
+			menuButton.children[0].style.transform = "rotate(180deg)";
 			navSetEnabled(true);
 		}
 	}
@@ -752,12 +747,7 @@ window.onresize = function onWindowResize()
 		//document.getElementById('nav_controls').style.left = (ww-rightSidebarSize-navButtonOffset)+"px";
 	}
 };
-<!-- document.onpointerdown = pointerdown_handler; -->
-<!-- document.onpointermove = pointermove_handler; -->
-<!-- document.onpointerup = pointerup_handler; -->
-<!-- document.onpointercancel = pointerup_handler; -->
-<!-- document.onpointerout = pointerup_handler; -->
-<!-- document.onpointerleave = pointerup_handler; -->
+
 function scrollEvent(){
 	//log("tY: "+tY);
 	if (event.deltaY < 0) {
@@ -774,7 +764,7 @@ function scrollEvent(){
 			dolly_y += 100;
 	}
 }
-document.getElementById('vis-container').onscroll = function(event) { scrollEvent(event); };
+//document.getElementById('vis-container').onscroll = function(event) { scrollEvent(event); };
 document.getElementById('vis-container').onwheel = function(event){
 	//event.preventDefault();
 	scrollEvent(event);
@@ -796,29 +786,59 @@ function pullParcelation(){
 		});
 }
 
-let messageData = null;
+let messageDict={};
 function pullMessages(){
 	fetch(messageUrl, {method: "GET"})
-		.then(response => response.json())
-		.then((data) => {
-			//log(data);
-			messageData = data;
-			bubbleSys.updateMessages(data);
+		.then((response) => response.json())
+		.then((messageData) => {
+		
+			for (let i=0;i<messageData.length;i++){
+				let messages = messageData[i].messages;
+				for (let k=0;k<messages.length;k++){
+					if (!messageDict.hasOwnProperty(messages[k].messageId)){
+						messageDict[messages[k].messageId]={
+							topicId:i,
+							timestamp:messages[k].timestamp,
+							reply:messages[k].reply,
+							message:messages[k].message
+						};
+						log(messageDict[messages[k].messageId]);
+					}
+				}
+			}
+			bubbleSys.updateMessages(messageData);			
 		});
 }
 
 if (isMobile.any()) toggleMenu('menu_button','close');
 else toggleMenu('menu_button','open');
 </script>
-<script id="messageTemplate" type="text/html">
-<div class="row message">
-	<div class="col">screww everything</div>
-</div>
-</script>
 <!-- Load React. -->
 <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
 <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+<!-- html templates -->
+<script id="messageTemplate" type="text/html">
+<div>
+<li>
+	<div class="message_wrapper">
+		<div class="message_text"></div>
+	</div>
+</li>
+</div>
+</script>
+<script id="messageReplyTemplate" type="text/html">
+<div>
+<li>
+	<div class="message_wrapper">
+		<input class="message_reply" disabled>
+		<div class="message_text pt-1"></div>
+	</div>
+</li>
+</div>
+</script>
+
 <script src="js/modal-questions.js"></script>
 <script src="js/modal-message.js"></script>
 <script src="js/react-modal.js"></script>

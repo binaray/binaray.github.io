@@ -39,10 +39,22 @@
     min-width: 100px;
     position: relative;
 }
+.appeared{
+	opacity:1;
+}
 .message_left .message_wrapper{
     background-color: #ffe6cb;
     margin-left: 20px;
-    box-shadow: 4px 5px 0 #b1beef;
+    /* box-shadow: 4px 5px 0 #b1beef; */
+}
+.message_right .message_wrapper{
+    background-color: #eef723;
+	float:right;
+    margin-right: 20px;
+    /* box-shadow: 4px 5px 0 #2a2110; */
+}
+.message_reply{
+	width:100%;
 }
 
 /* Message modal input footer */
@@ -59,22 +71,22 @@
     height: 60px;
     border-radius: 5px;
     border: 1px solid #bcbdc0;
-    width: calc(100% - 75px);
+    width: 100%;
     position: relative;
-    padding: 0 20px;
+    padding: 0 0 0 20px;
 }
 .message_input {
     border: none;
     height: 100%;
     background-color: transparent;
     box-sizing: border-box;
-    width: calc(100% - 40px);
+    width: calc(100% - 50px);
     position: absolute;
     outline-width: 0;
     color: gray;
 }
 
-.send_button_container {
+.send_button {
     display: inline-block;
     float: right;
 }

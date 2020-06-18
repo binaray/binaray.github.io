@@ -36,20 +36,6 @@ function setModalState(mode,props=null){
 					questionsRoot.style.display = "none";
 					messageRoot.style.opacity=1;
 				},100);
-			// topicId=props.topicId;
-			// log(messageData);
-			// if (props!=null){
-				// ReactDOM.render(
-					// e(ModalMessage, {topicId:props.topicId, replyId:props.replyId}, null),
-					// modalRoot
-				// );
-			// }
-			// else{
-				// ReactDOM.render(
-					// e(ModalMessage, null, null),
-					// modalRoot
-				// );
-			// }
 			break;
 		default:
 			questionsRoot.style.opacity=0;
