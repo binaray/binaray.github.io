@@ -1,0 +1,198 @@
+.q_title {
+  margin-top: 10%;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 50px;
+  line-height: 59px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+
+  color: #e90006;
+}
+
+.q_padding {
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.q_break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+.q_subtitle {
+  font-weight: 200;
+  font-size: 20px;
+  line-height: 23px;
+}
+
+.q_body {
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 160%;
+  color: #e90006;
+  text-align: center;
+}
+
+.q_padding_body {
+  padding-left: 20%;
+  padding-right: 20%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+.q_button {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+}
+
+.q_welcome {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 35px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  color: #e90006;
+}
+
+.q_choose {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 23px;
+  text-align: center;
+
+  color: #e90006;
+}
+
+.q_options {
+  text-align: center;
+}
+
+.q_options_item {
+  padding-top: 1.5%;
+}
+
+.q_option_name {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  padding-top: 3%;
+  padding-bottom: 1%;
+  color: #e90006;
+}
+
+.q_deselect_img {
+  opacity: 0.3;
+}
+
+.q_buttonContainer {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 5%;
+}
+
+input[type='button'] {
+  height: 50px;
+  width: 200px;
+  border-radius: 50px;
+  border: 1px solid red;
+  color: red;
+  background: transparent;
+}
+
+.slidecontainer {
+  width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none; /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 15px; /* Specified height */
+  border-radius: 5px;
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
+  transition: opacity 0.2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  border-radius: 50%;
+  background: #4caf50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  border-radius: 50%;
+  background: #4caf50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.q_sliderContainer {
+  display: flex;
+  width: 60%;
+  margin: auto;
+  padding-top: 20%;
+  padding-bottom: 15%;
+}
+.MuiSlider-colorSecondary {
+  color: red !important;
+}
+
+.q_yesno {
+  margin-top: 30%;
+}
+
+.q_room {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  text-align: center;
+  margin-top: 15%;
+  margin-bottom: 10%;
+  color: #e90006;
+}
+
+.q_roomchoice {
+  margin-bottom: 10%;
+}
+
+select {
+  color: #e90006;
+  border-color: #e90006;
+}

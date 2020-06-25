@@ -3,6 +3,8 @@ body{
 	overflow:hidden;
 	margin : 0;
 	background-color: #E90006;
+	font-family: Roboto;
+  font-weight: 100;
 	width:100%;
 	height:100%;
 }
@@ -18,7 +20,6 @@ hr {border-top: 1px solid white;}
 /*--Layout and positioning of canvas UI- zoom buttons, filter; styling and tweaks to position needed*/
 #title { position: absolute; top: 0px; width: 100%; text-align: center; color: white;}
 #left-sidebar,#right-sidebar{
-	background-color: #E90006; 
 	color: white;
 	position:absolute;
 	top:0;
@@ -30,6 +31,7 @@ hr {border-top: 1px solid white;}
 	left:0;
 }
 #right-sidebar{ 
+	background-color: #E90006; 
 	width:260px;
 	right:0;
 	padding: 10px;
@@ -42,7 +44,9 @@ hr {border-top: 1px solid white;}
 }
 /* Hide scrollbar for IE and Edge */
 .hide_scroll {
-  -ms-overflow-style: none;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+    overflow: scroll;
 }
 
 #nav_controls{
@@ -58,10 +62,17 @@ hr {border-top: 1px solid white;}
     text-decoration: none;
 }
 
+.modal_close_button,
 .a_btn_modal{color:black;}
+.modal_close_button:hover,
 .a_btn_modal:hover{
     color: blue;
     text-decoration: none;
+}
+.modal_close_button{
+	position:absolute;
+	top:0;
+	right:0;
 }
 
 /*--Sample overlay- modify and rename these as you wish--//*/
@@ -79,11 +90,12 @@ hr {border-top: 1px solid white;}
 }
 
 /*--Modal window--*/
-#questions_modal_container,
-#message_modal_container{
+.modal_container{
     position: absolute;
     max-width: 800px;
-    max-height: 550px;
+	height:85%;	/*This will be overriden in scaleToScreenSize*/
+    /* max-height: 85%; */
+	/* min-height: 600px; */
     left: 50%;
     top: 50%;
     transform: translateX(-50%) translateY(-50%);
@@ -93,7 +105,8 @@ hr {border-top: 1px solid white;}
 .modal_window {
     width: 100%;
     height: 100%;
-    border-radius: 10px;
+	position: relative;
+    border-radius: 30px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
     background-color: #f8f8f8;
     overflow: hidden;
