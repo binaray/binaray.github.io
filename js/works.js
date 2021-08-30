@@ -125,11 +125,11 @@ $(document).ready(function(){
 	//--init display
 	let data=[];
 	
-	data.push(new Project('Future Hybrid Highrise Commune','TBC',
+	data.push(new Project('Future Hybrid Highrise Commune','2021/03',
 	'Venice Biennale 2020, Singapore Pavilion',
 	['c#','unity','ar','exhibition'],
 	'Individual users participate as prospective tenants in the launch of a high-rise commune. Expressing wishes regarding their own apartment, together with numerous other future neighbours, these wishes agglomerate on a layout that allows numerous apartment sizes and life-styles to inhabit them.',
-	'2',null,
+	'2','https://www.youtube.com/embed/59b9tjqB4pM',
 	null,
 	['Direction: Michael Budig, Oliver Heckmann','Programming: Ray Cheng','AR: Clement Lork']));
 
