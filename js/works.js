@@ -147,7 +147,7 @@ $(document).ready(function(){
 	'Developed interactive exhibits for Metajam 2022, a Web3/NFT festival in Singapore.',
 	'0','https://www.youtube.com/embed/B1tun1BG8oU',
 	{Information:'https://metajam.asia'},
-	['Space: Invade','Creative Agency: Kult Studio and Gallery']));
+	['Event and Hosting: Invade','Creative Agency: Kult Studio and Gallery']));
 	
 	data.push(new Project('Future Hybrid Highrise Commune','2021/03',
 	'Venice Biennale 2020, Singapore Pavilion',
