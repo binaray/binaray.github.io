@@ -125,6 +125,30 @@ $(document).ready(function(){
 	//--init display
 	let data=[];
 	
+	data.push(new Project('Sleepless in SG','2022/07/22',
+	'ION Orchard Art Gallery',
+	['c#','unity','UI/UX design'],
+	'Developed a tablet voting app using visceral design principles for a night photography exhibition, featuring Samsung S22 night mode camera.',
+	'0','https://player.vimeo.com/video/770571207?h=f8f7f2197e',
+	{Information:'https://www.samsung.com/sg/sleeplessinsg/'},
+	['Creative Agency: Kult Studio and Gallery']));
+	
+	data.push(new Project('Mythology Relooked','2022/04/05',
+	'Singapore Chinese Cultural Centre',
+	['c#','unity','interactive exhibit','image processing'],
+	'Developed interactive exhibits for Mythology Relooked, a moving gallery sponsored by the Singapore Chinese Cultural Centre.',
+	'0','https://player.vimeo.com/video/757448411?h=882ba9da60',
+	null,
+	['Creative Agency: Kult Studio and Gallery']));
+	
+	data.push(new Project('Metajam 2022','2022/04/05',
+	'Tekka Place Event Space',
+	['c#','unity','interactive exhibit','image processing'],
+	'Developed interactive exhibits for Metajam 2022, a Web3/NFT festival in Singapore.',
+	'0','https://www.youtube.com/embed/B1tun1BG8oU',
+	{Information:'https://metajam.asia'},
+	['Space: Invade','Creative Agency: Kult Studio and Gallery']));
+	
 	data.push(new Project('Future Hybrid Highrise Commune','2021/03',
 	'Venice Biennale 2020, Singapore Pavilion',
 	['c#','unity','ar','exhibition'],
@@ -132,14 +156,6 @@ $(document).ready(function(){
 	'2','https://www.youtube.com/embed/59b9tjqB4pM',
 	null,
 	['Direction: Michael Budig, Oliver Heckmann','Programming: Ray Cheng','AR: Clement Lork']));
-
-	data.push(new Project("c'est mignon",'Ongoing',
-	'Personal',
-	['php','wordpress','web'],
-	'Ongoing project to develop a customized wordpress website for circle members to feature and post art, merchandise and events.',
-	'1',null,
-	{ Instagram:'https://www.instagram.com/mvmc_atelier/'},
-	null));
 	
 	data.push(new Project('HamuHamu Factory','2019/08/16',
 	'Singapore University of Technology and Design',
@@ -148,14 +164,6 @@ $(document).ready(function(){
 	'3','https://www.youtube.com/embed/Rw23uZywoB4',
 	{Download:'https://www.dropbox.com/sh/7fvmdzauc73eu4e/AAA0TtI5--aE4BNtD7YeqV-Xa?dl=0'},
 	['Creative Director: Ray Cheng','Programming: Lim Yuet Tung','Music: Gu Zhiyao']));
-	
-	data.push(new Project('Visualization of a 3D Vector Field','2019/08/16',
-	'Singapore University of Technology and Design',
-	['c++','opengl','project'],
-	'Graphics and Visualization project. <br>A 3D visual representation of a vector field built using a unique particle system, to simulate wind speed or magnetic field representations.',
-	'2',null,
-	null,
-	null));
 	
 	data.push(new Project('Valterego','2019/09/09',
 	'Entrepreneurship',
