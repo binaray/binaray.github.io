@@ -125,18 +125,18 @@ $(document).ready(function(){
 	//--init display
 	let data=[];
 	
-	data.push(new Project('Sleepless in SG','2022/07/22',
-	'ION Orchard Art Gallery',
-	['c#','unity','UI/UX design'],
-	'Developed a tablet voting app using visceral design principles for a night photography exhibition, featuring Samsung S22 night mode camera.',
-	'0','https://player.vimeo.com/video/770571207?h=f8f7f2197e',
-	{Information:'https://www.samsung.com/sg/sleeplessinsg/'},
-	['Creative Agency: Kult Studio and Gallery']));
+	// data.push(new Project('Sleepless in SG','2022/07/22',
+	// 'ION Orchard Art Gallery',
+	// ['c#','unity','UI/UX design'],
+	// 'Developed a tablet voting app using visceral design principles for a night photography exhibition, featuring Samsung S22 night mode camera.',
+	// '0','https://player.vimeo.com/video/770571207?h=f8f7f2197e',
+	// {Information:'https://www.samsung.com/sg/sleeplessinsg/'},
+	// ['Creative Agency: Kult Studio and Gallery']));
 	
 	data.push(new Project('Mythology Relooked','2022/04/05',
-	'Singapore Chinese Cultural Centre',
+	'Singapore Chinese Cultural Centre, Funan Mall',
 	['c#','unity','interactive exhibit','image processing'],
-	'Developed interactive exhibits for Mythology Relooked, a moving gallery sponsored by the Singapore Chinese Cultural Centre.',
+	'A moving gallery showing a different perspective on Chinese mythology, sponsored by the Singapore Chinese Cultural Centre.<br>The gallery features artworks contributed by artists around the world accompanied with AR filters, and 4 interactive exhibits.',
 	'0','https://player.vimeo.com/video/757448411?h=882ba9da60',
 	null,
 	['Creative Agency: Kult Studio and Gallery']));
@@ -144,15 +144,15 @@ $(document).ready(function(){
 	data.push(new Project('Metajam 2022','2022/04/05',
 	'Tekka Place Event Space',
 	['c#','unity','interactive exhibit','image processing'],
-	'Developed interactive exhibits for Metajam 2022, a Web3/NFT festival in Singapore.',
-	'0','https://www.youtube.com/embed/B1tun1BG8oU',
+	'A Web3/NFT festival in Singapore aiming to educate and and discuss innovative topics in the web3 space.<br>Featured a digital interactive space called the Metasphere where a large projection mapped wall can be filled with visitor contributed artworks.',
+	'2','https://www.youtube.com/embed/B1tun1BG8oU',
 	{Information:'https://metajam.asia'},
 	['Event and Hosting: Invade','Creative Agency: Kult Studio and Gallery']));
 	
 	data.push(new Project('Future Hybrid Highrise Commune','2021/03',
 	'Venice Biennale 2020, Singapore Pavilion',
 	['c#','unity','ar','exhibition'],
-	'Individual users participate as prospective tenants in the launch of a high-rise commune. Expressing wishes regarding their own apartment, together with numerous other future neighbours, these wishes agglomerate on a layout that allows numerous apartment sizes and life-styles to inhabit them.',
+	'A featured architecture project at Venice Biennale 2020, Singapore Pavilion, composed of a 4m tall structure accompanied by interactive web and AR apps.<br>The project aims to agglomerate an apartment layout with housing units based on tenant wishes.',
 	'2','https://www.youtube.com/embed/59b9tjqB4pM',
 	null,
 	['Direction: Michael Budig, Oliver Heckmann','Programming: Ray Cheng','AR: Clement Lork']));
@@ -163,7 +163,7 @@ $(document).ready(function(){
 	'Game Design project.<br>In the far outskirts of a town, lies the fallen ruins of a once great factory, HamuHamu Factory. Rebuild HamuHamu to a major hub for production in a world where rodents, critters and household pets stand on two feet and act as a functional capitalistic society.',
 	'3','https://www.youtube.com/embed/Rw23uZywoB4',
 	{Download:'https://www.dropbox.com/sh/7fvmdzauc73eu4e/AAA0TtI5--aE4BNtD7YeqV-Xa?dl=0'},
-	['Creative Director: Ray Cheng','Programming: Lim Yuet Tung','Music: Gu Zhiyao']));
+	['Art Assets: Ray Cheng','Programming: Lim Yuet Tung','Music: Gu Zhiyao']));
 	
 	data.push(new Project('Valterego','2019/09/09',
 	'Entrepreneurship',
@@ -171,7 +171,7 @@ $(document).ready(function(){
 	'An entrepreneurship project which started from a vision to build a better virtual pet. After vetting with industries outside, it evolved to an engagement platform serving as a data collection tool for therapists and administrators.',
 	'2',null,
 	null,
-	['Unity Programming: Lim Yuet Tung, Ray Cheng','Machine Learning: Foo Lin Geng','Assets, UI/UX: Lim Kenjyi','IoT: Samson Choo']));
+	['Programming: Lim Yuet Tung, Ray Cheng','Machine Learning: Foo Lin Geng','Art Assets, UI/UX: Lim Kenjyi','IoT: Samson Choo']));
 	
 	data.push(new Project('Pipsqueak Marketplace','2019/12/29',
 	'Entrepreneurship',
@@ -187,7 +187,7 @@ $(document).ready(function(){
 	'A smart AR companion which helps controls IoT devices in your home.',
 	'1','https://www.youtube.com/embed/GbTqTy4oVDY',
 	{Information:'https://devpost.com/software/ariot-kdvt9m',Sourcecode:'https://github.com/binaray/ARCompa'},
-	['Programming: Lim Yuet Tung','Assets: Ray Cheng','Microcontroller: Foo Lin Geng']));
+	['Programming: Lim Yuet Tung','Art Assets: Ray Cheng','Microcontroller: Foo Lin Geng']));
 	
 	data.push(new Project('Research on the Feasibility of High Resolution 3DCG Models','2018/09/09',
 	'Singapore University of Technology and Design',
@@ -211,7 +211,7 @@ $(document).ready(function(){
 	'A Unity-based multiplayer survival which players are required to cooperate to survive and reach the end.',
 	'1','https://www.youtube.com/embed/MQ-OrJQVeTs',
 	null,
-	['Creative Director and Programming: Ray Cheng','Networking: Tan Ting Yu','Music: Gu Zhiyao']));
+	['Art Assets and Programming: Ray Cheng','Networking: Tan Ting Yu','Music: Gu Zhiyao']));
 	
 	data.push(new Project('Letters4','2018/07/08',
 	'Singapore University of Technology and Design',
@@ -219,7 +219,7 @@ $(document).ready(function(){
 	'Project for Material Things in Social Life.<br>Why do people write letters and for what purposes? To whom, how often and what is conveyed by them; what do people feel when writing or reading letters and what do letters mean to a writer or a reader. the story of an old man through the personification of letters he has received through his life; each recounting their experiences.',
 	'2',null,
 	{Download:'https://www.dropbox.com/sh/60bj9ocmsqysm9p/AADiGhwt6N_D-aW7rQYNux4da?dl=0'},
-	['Creative Director: Ray Cheng','Programming: Dominic Ong','Story: Anirudh, Dalvi']));
+	['Art Assets: Ray Cheng','Programming: Dominic Ong','Story: Anirudh, Dalvi']));
 	
 	data.push(new Project('AP1D Travel Planner','2018/03/03',
 	'Singapore University of Technology and Design',
@@ -243,7 +243,7 @@ $(document).ready(function(){
 	'One of my very first game projects. A small exploration game created using Gamemaker Studio featuring stop-motion origami photo assets.',
 	'2',null,
 	null,
-	['Creative Director: Ray Cheng','Programming: Lim Yuet Tung']));
+	['Art Assets: Ray Cheng','Programming: Lim Yuet Tung']));
 	
 	data.push(new Project('Dynamic Website Design','2015/04/15',
 	'Kumamoto National College of Technology',
