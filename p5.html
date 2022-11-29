@@ -159,28 +159,37 @@ let halfToneSize = 5;
 let t=0;
 let lod=0, falloff=0;
 let stepSize = 6; // between ellipses
+let imgWidth,imgHeight;
 
 function resizeImage(){
   canvasDotWidth = width / stepSize + 1;
   canvasDotHeight = height / stepSize + 1;
-  let imgWidth;
+  let imgDotWidth;
   if (width>height){
-    imgWidth = width/3/stepSize;
+    imgWidth = width*0.5;
+    imgDotWidth = imgWidth/stepSize;
   }
   else{
-    imgWidth = width/2/stepSize;
+    imgWidth = width*0.8;
+    imgDotWidth = imgWidth/stepSize;
   }
-  img.resize(imgWidth,0);
-  imgStartWidth = floor((canvasDotWidth-imgWidth)/2);
-  imgEndWidth = floor(imgStartWidth + imgWidth);
-  let imgHeight = img.height*imgWidth/img.width;
-  imgStartHeight = floor((canvasDotHeight - imgHeight) / 2);
-  imgEndHeight = floor(imgStartHeight + imgHeight);
+  imgHeight = imgTemplate.height/imgTemplate.width*imgWidth;
+  //img.resize(imgDotWidth,0);
+  imgStartWidth = floor((canvasDotWidth-imgDotWidth)/2);
+  imgEndWidth = floor(imgStartWidth + imgDotWidth);
+  let imgDotHeight = imgTemplate.height*imgDotWidth/imgTemplate.width;
+  imgStartHeight = floor((canvasDotHeight - imgDotHeight) / 2);
+  imgEndHeight = floor(imgStartHeight + imgDotHeight);
+
+  img = createImage(imgTemplate.width, imgTemplate.height);
+  img.copy(imgTemplate, 0, 0, imgTemplate.width, imgTemplate.height, 0, 0, imgTemplate.width, imgTemplate.height);
+  img.resize(imgDotWidth,0);
   img.loadPixels();
 }
 
 function preload() {
-  img = loadImage('resources/test/kult_50.png');
+  //img = loadImage('resources/test/kult_50.png');
+  imgTemplate = loadImage('resources/test/kult_50.png');
 }
 
 function setup() {
@@ -197,6 +206,9 @@ function setup() {
 
 function draw() {
   background(0);
+  fill(255);
+  noStroke();
+
   // lod=map(mouseX, 0, width, 0, 10);
   // falloff=map(mouseY, 0, height, 0, 1);
 
@@ -204,19 +216,14 @@ function draw() {
   //   for (let y=0; y<height; y+=stepSize){
   //     let luma = noise(x*0.005, y*0.02,t);
   //     let diameter = map(luma, 0, 1, 0, stepSize);
-  //     fill(255);
-  //     noStroke();
   //     ellipse(x,y,diameter,diameter);
   //   }
   // }
   // t+=0.05;
 
-  fill(255);
-  noStroke();
   for (let x=0; x<canvasDotWidth; x++){
     for (let y=0; y<canvasDotHeight; y++){
       let luma = noise(x*stepSize*0.005, y*stepSize*0.02,t);
-
       if ((x>=imgStartWidth && x<imgEndWidth)&&(y>=imgStartHeight && y<imgEndHeight)){
         let i = ((y-imgStartHeight) * img.width + x-imgStartWidth) * 4;
         let r = img.pixels[i];
