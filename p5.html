@@ -151,80 +151,96 @@ getDocHeight();
 </script>
 
 <script type="text/javascript">
-let img;
+let imgTemplate, img;
+let canvasDotWidth, canvasDotHeight;
+let imgStartWidth, imgEndWidth, imgStartHeight, imgEndHeight;
 let noiseScaleX = 1, noiseScaleY = 2.4;
 let halfToneSize = 5;
 let t=0;
 let lod=0, falloff=0;
+let stepSize = 6; // between ellipses
+
+function resizeImage(){
+  canvasDotWidth = width / stepSize + 1;
+  canvasDotHeight = height / stepSize + 1;
+  let imgWidth;
+  if (width>height){
+    imgWidth = width/3/stepSize;
+  }
+  else{
+    imgWidth = width/2/stepSize;
+  }
+  img.resize(imgWidth,0);
+  imgStartWidth = floor((canvasDotWidth-imgWidth)/2);
+  imgEndWidth = floor(imgStartWidth + imgWidth);
+  let imgHeight = img.height*imgWidth/img.width;
+  imgStartHeight = floor((canvasDotHeight - imgHeight) / 2);
+  imgEndHeight = floor(imgStartHeight + imgHeight);
+  img.loadPixels();
+}
 
 function preload() {
-  //img = loadImage('resources/test/kult_50.png');
+  img = loadImage('resources/test/kult_50.png');
 }
 
 function setup() {
   let myCanvas = createCanvas(windowWidth, windowHeight);
   myCanvas.parent('myContainer');
-  frameRate(30);
+  frameRate(14);
   //noiseDetail(8, 0.65);
+  resizeImage();
+  console.log("img:"+img.width+", "+img.height);
+  console.log("dotCanvas:"+canvasDotWidth+", "+canvasDotHeight);
+  console.log("size:"+width+", "+height);
   noiseDetail(0.5,0.5);
 }
 
 function draw() {
   background(0);
-  let stepSize = 6;
   // lod=map(mouseX, 0, width, 0, 10);
   // falloff=map(mouseY, 0, height, 0, 1);
-  // noiseDetail(lod,falloff);
-  // console.log('lod:'+lod+' falloff:'+falloff);
 
+  // for (let x=0; x<width; x+=stepSize){
+  //   for (let y=0; y<height; y+=stepSize){
+  //     let luma = noise(x*0.005, y*0.02,t);
+  //     let diameter = map(luma, 0, 1, 0, stepSize);
+  //     fill(255);
+  //     noStroke();
+  //     ellipse(x,y,diameter,diameter);
+  //   }
+  // }
+  // t+=0.05;
 
-  for (let x=0; x<width; x+=stepSize){
-    for (let y=0; y<height; y+=stepSize){
-      let luma = noise(x*0.005, y*0.02,t);
+  fill(255);
+  noStroke();
+  for (let x=0; x<canvasDotWidth; x++){
+    for (let y=0; y<canvasDotHeight; y++){
+      let luma = noise(x*stepSize*0.005, y*stepSize*0.02,t);
+
+      if ((x>=imgStartWidth && x<imgEndWidth)&&(y>=imgStartHeight && y<imgEndHeight)){
+        let i = ((y-imgStartHeight) * img.width + x-imgStartWidth) * 4;
+        let r = img.pixels[i];
+        let greyscale = map(r,0,255,0,1);
+        luma *= greyscale;
+      }
+
       let diameter = map(luma, 0, 1, 0, stepSize);
-      fill(255);
-      noStroke();
-      ellipse(x,y,diameter,diameter);
+      ellipse(x*stepSize,y*stepSize,diameter,diameter);
     }
   }
   t+=0.05;
-
-  // let stepSize = floor(map(mouseX, 0, width, 4, 40));
-    
-  // video.loadPixels();
-  // for (let x = 0; x < video.width; x += stepSize) {
-  //   for (let y = 0; y < video.height; y += stepSize) {
-  //     let i = (y * video.width + x) * 4;
-      
-  //     let r = video.pixels[i];
-  //     let g = video.pixels[i+1];
-  //     let b = video.pixels[i+2];
-  //     let a = video.pixels[i+3];
-      
-  //     let luma = 0.299 * r + 0.587 * g + 0.114 * b;
-      
-  //     let diameter = map(luma, 0, 255, 0, stepSize);
-  //     fill(255);
-  //     noStroke();
-  //     ellipse(
-  //       map(x, 0, video.width, 0, width),
-  //       map(y, 0, video.height, 0, height),
-  //       diameter,
-  //       diameter
-  //     );
-  //   }
-  // }
 }
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
-  if(windowHeight > windowWidth){
-    factor = windowHeight;
-    factdiv = 1080;
-  }else{
-    factor = windowWidth;
-    factdiv = 1920;
-  }
+  resizeImage();
+  // if(windowHeight > windowWidth){
+  //   factor = windowHeight;
+  //   factdiv = 1080;
+  // }else{
+  //   factor = windowWidth;
+  //   factdiv = 1920;
+  // }
 }
 </script>
   </body>
