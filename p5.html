@@ -243,15 +243,13 @@ function draw() {
         let i = ((y-imgStartHeight) * img.width + x-imgStartWidth) * 4;
         let r = img.pixels[i];
         let greyscale = map(r,0,255,0,1);
-        if (greyscale<0.5){
+        luma = 1*(1 - greyscale)+greyscale*luma;
+        if (greyscale<0.5)
           noEffect = true;
-          greyscale+=luma;
-        }
-        luma *= greyscale;
       }
       
       // transition to next page
-      luma=lerp(luma,1-luma,stateT());
+      luma=lerp(1-luma,luma,stateT());
 
       // mouse hover effect
       let canvasPosX = x*stepSize;
