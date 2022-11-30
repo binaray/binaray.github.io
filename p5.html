@@ -8,116 +8,97 @@
     <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
-
+      .button_bg{
+        background: #000;
+      }
+      .fill-height{
+        height:-moz-available;
+        height:-webkit-fill-available;
+        height:fill-available;
+      }
     </style>
   </head>
   <body class="text-bg-dark" style="color: #fff;background: #000;">
     <div id="myContainer" style="position: fixed;top: 0;right: 0;left: 0;"></div>
     
     <main>
-      <div class="single-page"></div>
+      <div class="single-page">
+        <nav class="navbar">
+          <div class="container-fluid">
+              <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+              </a>
+              <div class="text-end">
+                <button type="button" class="btn btn-outline-light me-2 button_bg">What</button>
+                <button type="button" class="btn btn-outline-light button_bg">Who</button>
+                <button type="button" class="btn btn-outline-light button_bg">Why</button>
+              </div>
+          </div>
+        </nav>
+      </div>
       <div class="single-page container text-center">
-        <div class="row" style="height:-moz-available;height:-webkit-fill-available;height:fill-available;">
+        <div class="row fill-height">
           <div class="col align-self-center">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/pOZhPz92Dic?autoplay=1&mute=1&loop=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
         </div>
       </div>
 
-
-      <!-- Marketing messaging and featurettes
-      ================================================== -->
-      <!-- Wrap the rest of the page in another container to center all the content. -->
-
-      <div class="container marketing">
-        <!-- Three columns of text below the carousel -->
-        <div class="row">
-          <div class="col-lg-4">
-            <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-
-            <h2 class="fw-normal">Heading</h2>
-            <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
-            <p><a class="btn btn-secondary" href="#">View details »</a></p>
-          </div><!-- /.col-lg-4 -->
-          <div class="col-lg-4">
-            <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-
-            <h2 class="fw-normal">Heading</h2>
-            <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
-            <p><a class="btn btn-secondary" href="#">View details »</a></p>
-          </div><!-- /.col-lg-4 -->
-          <div class="col-lg-4">
-            <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-
-            <h2 class="fw-normal">Heading</h2>
-            <p>And lastly this, the third column of representative placeholder content.</p>
-            <p><a class="btn btn-secondary" href="#">View details »</a></p>
-          </div><!-- /.col-lg-4 -->
-        </div><!-- /.row -->
-
-
-        <!-- START THE FEATURETTES -->
-
-        <hr class="featurette-divider">
-
-        <div class="row featurette">
-          <div class="col-md-7">
-            <h2 class="featurette-heading fw-normal lh-1">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
-            <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
+      <div class="single-page container">
+        <form class="needs-validation" novalidate="">
+          <div class="row g-0 fill-height">
+            <div class="col-12 row align-self-center">
+              <div class="col-sm-6 mb-3">
+                <input type="text" class="form-control" id="name" placeholder="NAME" value="" required="">
+                <div class="invalid-feedback">
+                  Valid first name is required.
+                </div>
+              </div>
+              <div class="col-sm-6 mb-3">
+                <input type="text" class="form-control" id="email" placeholder="EMAIL" value="" required="">
+                <div class="invalid-feedback">
+                  Valid email is required.
+                </div>
+              </div>
+              <div class="col-12 mb-3">
+                <div class="input-group has-validation">
+                  <input type="text" class="form-control" id="company" placeholder="COMPANY" required="">
+                  <div class="invalid-feedback">
+                    Company name is required.
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="input-group has-validation">
+                  <textarea class="form-control" id="message" rows="3" placeholder="MESSAGE" required=""></textarea>
+                  <div class="invalid-feedback">
+                    Message is empty.
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 my-4">
+                <button class="w-100 btn btn-primary btn-lg" type="submit">Submit</button>
+              </div>
+            </div>
           </div>
-          <div class="col-md-5">
-            <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"></rect><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
-
-          </div>
-        </div>
-
-        <hr class="featurette-divider">
-
-        <div class="row featurette">
-          <div class="col-md-7 order-md-2">
-            <h2 class="featurette-heading fw-normal lh-1">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
-            <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.</p>
-          </div>
-          <div class="col-md-5 order-md-1">
-            <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"></rect><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
-
-          </div>
-        </div>
-
-        <hr class="featurette-divider">
-
-        <div class="row featurette">
-          <div class="col-md-7">
-            <h2 class="featurette-heading fw-normal lh-1">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-            <p class="lead">And yes, this is the last block of representative placeholder content. Again, not really intended to be actually read, simply here to give you a better view of what this would look like with some actual content. Your content.</p>
-          </div>
-          <div class="col-md-5">
-            <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"></rect><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
-
-          </div>
-        </div>
-
-        <hr class="featurette-divider">
-
-        <!-- /END THE FEATURETTES -->
-
-      </div><!-- /.container -->
-
-
+        </form>
+      </div>
       <!-- FOOTER -->
-      <footer class="container">
-        <p class="float-end"><a href="#">Back to top</a></p>
-        <p>© 2017–2022 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+      <footer class="container-fluid">
+        <div class="row py-1">
+          <div class="col-12">
+            <a href="#">Back to top</a>
+          </div>
+          <div class="col-12">
+            © 2017–2022 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a>
+          </div>
+        </div>
       </footer>
     </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js" integrity="sha512-WJXVjqeINVpi5XXJ2jn0BSCfp0y80IKrYh731gLRnkAS9TKc5KNt/OfLtu+fCueqdWniouJ1ubM+VI/hbo7POQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript">
-// disable mobile pinch zoom
-document.addEventListener('gesturestart', function (e) {
-  e.preventDefault();
-});
-
+const isMobile = (/Android|iPhone/i.test(navigator.userAgent));
 let docHeight;
 
 function getDocHeight() {
@@ -134,8 +115,11 @@ function setElementHeights(){
   let windowHeight = innerHeight+"px";
   let elements = document.getElementsByClassName("single-page");
   for (let el in elements){
-    if(elements.hasOwnProperty(el))
+    if(elements.hasOwnProperty(el)){
+      if (elements[el].style.height>windowHeight)
+        continue;
       elements[el].style.height = windowHeight;
+    }
   }
 }
 function getScrollPos() {
@@ -143,6 +127,10 @@ function getScrollPos() {
   console.log(window.pageYOffset/docHeight);
 }
 
+// disable mobile pinch zoom
+document.addEventListener('gesturestart', function (e) {
+  e.preventDefault();
+});
 window.onresize = function() {
   getDocHeight();
   setElementHeights();
@@ -156,12 +144,14 @@ setElementHeights();
 let imgTemplate, img;
 let canvasDotWidth, canvasDotHeight;
 let imgStartWidth, imgEndWidth, imgStartHeight, imgEndHeight;
-let noiseScaleX = 1, noiseScaleY = 2.4;
-let halfToneSize = 5;
+const noiseScaleX = 1, noiseScaleY = 2.4;
+const halfToneSize = 5;
 let t=0;
-let lod=0, falloff=0;
-let stepSize = 6; // between ellipses
+const lod=falloff=0.5;
+const stepSize = 6; // between ellipses
+const pulseDistance = 100;
 let imgWidth,imgHeight;
+let mouseDistFunction;
 
 function resizeImage(){
   canvasDotWidth = width / stepSize + 1;
@@ -176,7 +166,6 @@ function resizeImage(){
     imgDotWidth = imgWidth/stepSize;
   }
   imgHeight = imgTemplate.height/imgTemplate.width*imgWidth;
-  //img.resize(imgDotWidth,0);
   imgStartWidth = floor((canvasDotWidth-imgDotWidth)/2);
   imgEndWidth = floor(imgStartWidth + imgDotWidth);
   let imgDotHeight = imgTemplate.height*imgDotWidth/imgTemplate.width;
@@ -194,19 +183,30 @@ function stateT(){
   return constrain(1-window.pageYOffset/innerHeight,0,1);
 }
 
+
 function preload() {
   imgTemplate = loadImage('resources/test/kult_50.png');
 }
 
 function setup() {
   let myCanvas = createCanvas(windowWidth, windowHeight);
+  if (isMobile){
+    mouseDistFunction=function(canvasPosX,canvasPosY){
+      return dist(canvasPosX,canvasPosY,touchX,touchY);
+    }
+  }
+  else{
+    mouseDistFunction=function(canvasPosX,canvasPosY){
+      return dist(canvasPosX,canvasPosY,mouseX,mouseY);
+    }
+  }
   myCanvas.parent('myContainer');
   frameRate(14);
   resizeImage();
   // console.log("img:"+img.width+", "+img.height);
   // console.log("dotCanvas:"+canvasDotWidth+", "+canvasDotHeight);
   // console.log("size:"+width+", "+height);
-  noiseDetail(0.5,0.5);
+  noiseDetail(lod,falloff);
 }
 
 function draw() {
@@ -256,9 +256,9 @@ function draw() {
       // mouse hover effect
       let canvasPosX = x*stepSize;
       let canvasPosY = y*stepSize;
-      let d = dist(canvasPosX,canvasPosY,mouseX,mouseY);
-      if (d<100 && !noEffect){
-        let f = 1 - d/100;
+      let d = mouseDistFunction(canvasPosX,canvasPosY);
+      if (d<pulseDistance && !noEffect){
+        let f = 1 - d/pulseDistance;
         luma = luma*(1-f)+f*sin(2*t+f*5);
       }
       let diameter = map(luma, 0, 1, 0, stepSize);
