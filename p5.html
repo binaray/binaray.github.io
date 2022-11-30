@@ -195,7 +195,6 @@ function stateT(){
 }
 
 function preload() {
-  //img = loadImage('resources/test/kult_50.png');
   imgTemplate = loadImage('resources/test/kult_50.png');
 }
 
@@ -203,11 +202,10 @@ function setup() {
   let myCanvas = createCanvas(windowWidth, windowHeight);
   myCanvas.parent('myContainer');
   frameRate(14);
-  //noiseDetail(8, 0.65);
   resizeImage();
-  console.log("img:"+img.width+", "+img.height);
-  console.log("dotCanvas:"+canvasDotWidth+", "+canvasDotHeight);
-  console.log("size:"+width+", "+height);
+  // console.log("img:"+img.width+", "+img.height);
+  // console.log("dotCanvas:"+canvasDotWidth+", "+canvasDotHeight);
+  // console.log("size:"+width+", "+height);
   noiseDetail(0.5,0.5);
 }
 
@@ -230,6 +228,7 @@ function draw() {
 
   for (let x=0; x<canvasDotWidth; x++){
     for (let y=0; y<canvasDotHeight; y++){
+      // remap noise values
       let luma = noise(x*stepSize*0.005, y*stepSize*0.02,t);
       if (luma<0.8){
         luma = map(luma,0,0.7,0,1);
@@ -237,18 +236,33 @@ function draw() {
       else{
         luma = map(luma,0.7,1,1,0.7);
       }
+      
+      // check if logo image hit
+      let noEffect = false; // no effect flag to influence hover
       if ((x>=imgStartWidth && x<imgEndWidth)&&(y>=imgStartHeight && y<imgEndHeight)){
         let i = ((y-imgStartHeight) * img.width + x-imgStartWidth) * 4;
         let r = img.pixels[i];
         let greyscale = map(r,0,255,0,1);
         if (greyscale<0.5){
+          noEffect = true;
           greyscale+=luma;
         }
         luma *= greyscale;
       }
+      
+      // transition to next page
       luma=lerp(luma,1-luma,stateT());
+
+      // mouse hover effect
+      let canvasPosX = x*stepSize;
+      let canvasPosY = y*stepSize;
+      let d = dist(canvasPosX,canvasPosY,mouseX,mouseY);
+      if (d<100 && !noEffect){
+        let f = 1 - d/100;
+        luma = luma*(1-f)+f*sin(2*t+f*5);
+      }
       let diameter = map(luma, 0, 1, 0, stepSize);
-      ellipse(x*stepSize,y*stepSize,diameter,diameter);
+      ellipse(canvasPosX,canvasPosY,diameter,diameter);
     }
   }
   t+=0.05;
