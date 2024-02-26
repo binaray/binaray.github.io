@@ -132,14 +132,14 @@ $(document).ready(function(){
 	// '0','https://player.vimeo.com/video/770571207?h=f8f7f2197e',
 	// {Information:'https://www.samsung.com/sg/sleeplessinsg/'},
 	// ['Creative Agency: Kult Studio and Gallery']));
-	
+	/*
 	data.push(new Project('Mythology Relooked','2022/04/05',
 	'Singapore Chinese Cultural Centre, Funan Mall',
 	['c#','unity','interactive exhibit','image processing'],
 	'A moving gallery showing a different perspective on Chinese mythology, sponsored by the Singapore Chinese Cultural Centre.<br>The gallery features artworks contributed by artists around the world accompanied with AR filters, and 4 interactive exhibits.',
 	'0','https://player.vimeo.com/video/757448411?h=882ba9da60',
 	null,
-	['Creative Agency: Kult Studio and Gallery']));
+	['Creative Agency: Kult Studio and Gallery']));*/
 	
 	data.push(new Project('Metajam 2022','2022/04/05',
 	'Tekka Place Event Space',
