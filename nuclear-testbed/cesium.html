@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <script src="https://cesium.com/downloads/cesiumjs/releases/1.129/Build/Cesium/Cesium.js"></script>
   <link href="https://cesium.com/downloads/cesiumjs/releases/1.129/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="js/jquery-csv.js"></script>
   <style>
   body { margin: 0; }
     #cesiumContainer { width: 100%; height: 100vh; }
@@ -16,6 +18,7 @@
 
     const viewer = new Cesium.Viewer("cesiumContainer", {
       terrainProvider: new Cesium.EllipsoidTerrainProvider(), // Spherical globe with no terrain
+	  vrButton: true,
 	  animation: false,
 	  timeline: false
     });
@@ -27,16 +30,69 @@
 			basemapOptions.splice(i,1)
 		else basemapOptions[i]._category = ''
 	}
+	
 	viewer.baseLayerPicker.viewModel.selectedImagery = basemapOptions[0];
 	// remove Cesium Ion credits- https://community.cesium.com/t/cesium-ion-logo-removal/8979
 	viewer._cesiumWidget._creditContainer.parentNode.removeChild(viewer._cesiumWidget._creditContainer);
 
     // Optional: Add a simple entity (e.g., a point)
-    viewer.entities.add({
-      position: Cesium.Cartesian3.fromDegrees(-75.59777, 40.03883),
-      point: { pixelSize: 10, color: Cesium.Color.RED },
-    });
 	window.v = viewer;
+	// Cluster Geopoints- https://sandcastle.cesium.com/index.html?src=Clustering.html
+	// shared cluster instance between all collections
+	const entitiesCluster = new Cesium.EntityCluster({
+		enabled: true,
+		pixelRange: 50,
+	});
+	entitiesCluster.clusterEvent.addEventListener(
+		function (clusteredEntities, cluster) {
+			  cluster.label.show = true;
+			  cluster.label.text = `${clusteredEntities.length}`;
+			  cluster.label.font = `15px sans-serif`;
+			  cluster.label.horizontalOrigin = Cesium.HorizontalOrigin.CENTER;
+			  cluster.label.verticalOrigin = Cesium.VerticalOrigin.CENTER;
+			  cluster.label.eyeOffset = new Cesium.Cartesian3(0, 0, -100),
+			  cluster.point.show = true;
+			  cluster.point.color  = new Cesium.Color(0.92, 0.58, 0.1, 1);
+			  cluster.point.pixelSize = 30;
+		},);
+	
+	const maritimeMuseums = new Cesium.CustomDataSource('MaritimeMuseums');
+	maritimeMuseums.clustering = entitiesCluster;
+
+	fetch("data/Maritime Museums (Oct 2024).csv")
+		.then((res) => res.text())
+		.then((text) => {
+			let museums = $.csv.toObjects(text);
+			for (const museum of museums){
+				const latLon = museum.Coordinates.split(/\s*,\s*/);
+				if (latLon.length < 2)	// skip invalid/extinct museums
+					continue;
+				const descrip = 
+					`<div class="map-overlay-inner">
+						${Object.entries(museum)
+							.map(([key, value]) => `<li><b>${key}</b>: ${value}</li>`)
+							.join('')}
+					</div>`;
+				maritimeMuseums.entities.add({
+				  name: museum['Museum Name'],
+				  description: descrip,
+				  position: Cesium.Cartesian3.fromDegrees(latLon[1],latLon[0]),
+				  point: {
+					pixelSize: 10,
+					color: Cesium.Color.RED
+				  }
+				});
+			}
+			viewer.dataSources.add(maritimeMuseums);
+		}).catch((e) => console.error(e));
+
+	// surface currents data scheme: 
+	// nx: Longitude Point Count, ny: Latitude Point Count, minMag: minMagnitude, maxMag: maxMagnitude
+	// data: [[lon, lat, velocity.x, velocity.y, magnitude],...]
+	/*fetch("data/oceanVel_0103_past1000_res250km_depth5m_1750-01-16.json")
+	.then((json) => return data.json())
+	.then((data) => {});//*/
+	
   </script>
  </div>
 </body>
