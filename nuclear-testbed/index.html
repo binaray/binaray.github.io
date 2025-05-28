@@ -236,37 +236,6 @@ body { margin: 0; padding: 0; }
                 ]
             }
         });
-    
-		/*map.addSource('airports', {
-            'type': 'vector',
-            'url': 'mapbox://mapbox.04w69w5j',
-            'promoteId': 'abbrev'
-        });
-
-        map.addLayer({
-            'id': 'airport',
-            'source': 'airports',
-            'source-layer': 'ne_10m_airports',
-            'type': 'circle',
-            'paint': {
-                'circle-color': [
-                    'case',
-                    ['boolean', ['feature-state', 'selected'], false],
-                    '#f00',
-                    '#4264fb'
-                ],
-                'circle-radius': [
-                    'case',
-                    ['boolean', ['feature-state', 'selected'], false],
-                    6,
-                    ['boolean', ['feature-state', 'highlight'], false],
-                    6,
-                    4
-                ],
-                'circle-stroke-width': 2,
-                'circle-stroke-color': '#ffffff'
-            },
-        });*/
 		
 		loadGeoJson.then((res) => {
 			map.addSource('museums', {

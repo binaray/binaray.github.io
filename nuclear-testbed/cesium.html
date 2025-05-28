@@ -34,6 +34,13 @@
 	viewer.baseLayerPicker.viewModel.selectedImagery = basemapOptions[0];
 	// remove Cesium Ion credits- https://community.cesium.com/t/cesium-ion-logo-removal/8979
 	viewer._cesiumWidget._creditContainer.parentNode.removeChild(viewer._cesiumWidget._creditContainer);
+	
+	// camera options
+	viewer.scene.screenSpaceCameraController.enableLook = false;
+	viewer.scene.screenSpaceCameraController.enableTilt = false;
+	viewer.scene.screenSpaceCameraController.inertiaSpin   = 0;
+	viewer.scene.screenSpaceCameraController.inertiaTranslate    = 0;
+	viewer.scene.screenSpaceCameraController.inertiaZoom    = 0;
 
     // Optional: Add a simple entity (e.g., a point)
 	window.v = viewer;
