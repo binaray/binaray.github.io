@@ -1041,9 +1041,9 @@ class Wind3D {
 var demo = Cesium.defaultValue(demo, false);
 
 const fileOptions = {
-    dataDirectory: '../data/',
+    dataDirectory: 'data/',
     dataFile: "demo.nc",
-    glslDirectory: demo ? '../Cesium-3D-Wind/glsl/' : 'glsl/'
+    glslDirectory: 'glsl/'
 }
 
 const defaultParticleSystemOptions = {

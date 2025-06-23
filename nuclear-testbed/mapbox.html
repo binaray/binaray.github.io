@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Mapbox test</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+    .map-overlay {
+        font: 12px/20px sans-serif;
+        padding: 10px;
+        position: absolute;
+        width: 250px;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+	
+	.top {
+        top: 0;		
+	}
+	
+    .mapboxgl-popup {
+        max-width: 400px;
+        font:
+            12px/20px 'Helvetica Neue',
+            Arial,
+            Helvetica,
+            sans-serif;
+    }
+	
+	.right {
+        display: none;
+        right: 0;
+        top: 0;	
+	}
+
+    .map-overlay-inner {
+        background: #fff;
+        padding: 10px;
+        border-radius: 3px;
+    }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<div class="map-overlay top">
+    <div class="map-overlay-inner">
+        <fieldset class="select-fieldset">
+            <label>Select style preset</label>
+            <select id="stylePreset" name="stylePreset">
+                <option value="satellite-streets-v12">satellite streets</option>
+                <option value="light-v11">light</option>
+                <option value="dark-v11" selected="">dark</option>
+                <option value="streets-v12">streets</option>
+                <option value="outdoors-v12">outdoors</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <label for="wind-layer">Show wind layer</label>
+            <input type="checkbox" id="wind-layer" checked="">
+        </fieldset>
+        <fieldset>
+            <label for="museum">Show museums</label>
+            <input type="checkbox" id="museum" checked="">
+        </fieldset>
+    </div>
+</div>
+<div class="map-overlay right" id="properties"></div>
+<script src="js/jquery-csv.js"></script>
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoibnR1cmF5IiwiYSI6ImNtYW5iZXNkbzBwd2oybHNmNGQ4dnBvbWQifQ.m8HO_p_OX8z-wdNkelkGqw';
+    const map = new mapboxgl.Map({
+        container: 'map',
+        maxZoom: 5,
+        minZoom: 1,
+        zoom: 3,
+        center: [-28, 47],
+        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+        style: 'mapbox://styles/mapbox/dark-v11', // style URL
+    });
+	
+	document
+	.getElementById('stylePreset')
+	.addEventListener('change', function () {
+		map.setStyle('mapbox://styles/mapbox/' + this.value);
+	});
+
+	document
+	.querySelectorAll('.map-overlay-inner input[type="checkbox"]')
+	.forEach((checkbox) => {
+		checkbox.addEventListener('change', function () {
+			if (event.target.checked) {
+				map.setLayoutProperty(this.id, 'visibility', 'visible');
+			} else {
+				map.setLayoutProperty(this.id, 'visibility', 'none');
+			}
+		});
+	});//*/
+	
+	// csv loader and parse data to geojson
+	// -- consider moving this to api level & convert to vector tile for data efficiency
+	// -- see https://docs.mapbox.com/data/tilesets/guides/vector-tiles-standards/ for details
+	const loadGeoJson = new Promise((resolve, reject) => {
+		
+		fetch("data/Maritime Museums (Oct 2024).csv")
+			.then((res) => res.text())
+			.then((text) => {
+				let museums = $.csv.toObjects(text);
+				const resCollection = {
+					type: "FeatureCollection",
+					features: []
+				}
+				
+				for (const museum of museums){
+					const latLon = museum.Coordinates.split(/\s*,\s*/);
+					if (latLon.length < 2)	// skip invalid/extinct museums
+						continue;
+					const g = {
+						type: "Point",
+						coordinates: latLon.reverse()
+					}
+					const descrip = `
+						<div class="map-overlay-inner">
+							<code>${museum['Museum Name']}</code><hr>
+							${Object.entries(museum)
+								.map(([key, value]) => `<li><b>${key}</b>: ${value}</li>`)
+								.join('')}
+						</div>`;
+					
+					const point = {
+						geometry: g,
+						type: "Feature",
+						properties: {
+							description: descrip
+						}
+					}
+					resCollection.features.push(point);
+				}
+				resolve(resCollection);
+		})
+		.catch((e) => console.error(e));
+	});
+	
+	const card = document.getElementById('properties');
+    const showCard = (feature) => {
+        card.innerHTML = feature.properties.description;
+        card.style.display = 'block';
+    };
+
+    map.on('style.load', () => {
+		// map.setFog({}); // Set the default atmosphere style
+
+        map.addSource('raster-array-source', {
+            'type': 'raster-array',
+            'url': 'mapbox://rasterarrayexamples.gfs-winds',
+            'tileSize': 512
+        });
+        map.addLayer({
+            'id': 'wind-layer',
+            'type': 'raster-particle',
+            'source': 'raster-array-source',
+            'source-layer': '10winds',
+            'paint': {
+                'raster-particle-speed-factor': 0.4,
+                'raster-particle-fade-opacity-factor': 0.9,
+                'raster-particle-reset-rate-factor': 0.4,
+                'raster-particle-count': 4000,
+                'raster-particle-max-speed': 40,
+                'raster-particle-color': [
+                    'interpolate',
+                    ['linear'],
+                    ['raster-particle-speed'],
+                    1.5,
+                    'rgba(134,163,171,256)',
+                    2.5,
+                    'rgba(126,152,188,256)',
+                    4.12,
+                    'rgba(110,143,208,256)',
+                    4.63,
+                    'rgba(110,143,208,256)',
+                    6.17,
+                    'rgba(15,147,167,256)',
+                    7.72,
+                    'rgba(15,147,167,256)',
+                    9.26,
+                    'rgba(57,163,57,256)',
+                    10.29,
+                    'rgba(57,163,57,256)',
+                    11.83,
+                    'rgba(194,134,62,256)',
+                    13.37,
+                    'rgba(194,134,63,256)',
+                    14.92,
+                    'rgba(200,66,13,256)',
+                    16.46,
+                    'rgba(200,66,13,256)',
+                    18.0,
+                    'rgba(210,0,50,256)',
+                    20.06,
+                    'rgba(215,0,50,256)',
+                    21.6,
+                    'rgba(175,80,136,256)',
+                    23.66,
+                    'rgba(175,80,136,256)',
+                    25.21,
+                    'rgba(117,74,147,256)',
+                    27.78,
+                    'rgba(117,74,147,256)',
+                    29.32,
+                    'rgba(68,105,141,256)',
+                    31.89,
+                    'rgba(68,105,141,256)',
+                    33.44,
+                    'rgba(194,251,119,256)',
+                    42.18,
+                    'rgba(194,251,119,256)',
+                    43.72,
+                    'rgba(241,255,109,256)',
+                    48.87,
+                    'rgba(241,255,109,256)',
+                    50.41,
+                    'rgba(256,256,256,256)',
+                    57.61,
+                    'rgba(256,256,256,256)',
+                    59.16,
+                    'rgba(0,256,256,256)',
+                    68.93,
+                    'rgba(0,256,256,256)',
+                    69.44,
+                    'rgba(256,37,256,256)'
+                ]
+            }
+        });
+		
+		loadGeoJson.then((res) => {
+			map.addSource('museums', {
+				'type': 'geojson',
+				'data': res,
+				'generateId': true
+			});
+			map.addLayer({
+				'id': 'museum',
+				'source': 'museums',
+				'type': 'circle',
+				'paint': {
+					'circle-color': [
+						'case',
+						['boolean', ['feature-state', 'selected'], false],
+						'#f00',
+						'#4264fb'
+					],
+					'circle-radius': [
+						'case',
+						['boolean', ['feature-state', 'selected'], false],
+						6,
+						['boolean', ['feature-state', 'highlight'], false],
+						6,
+						4
+					],
+					'circle-stroke-width': 2,
+					'circle-stroke-color': '#ffffff'
+				}
+			});
+			
+		});
+		
+		// Clicking on a feature will highlight it and display its properties in the card
+        var selectedFeature = null;
+        map.addInteraction('click', {
+            type: 'click',
+            target: { layerId: 'museum' },
+            handler: ({ feature }) => {
+                if (selectedFeature) {
+                    map.setFeatureState(selectedFeature, { selected: false });
+                }
+
+                selectedFeature = feature;
+                map.setFeatureState(feature, { selected: true });
+                showCard(feature);
+				
+				const coordinates = feature.geometry.coordinates.slice();
+				const description = feature.properties.description;
+				// Ensure that if the map is zoomed out such that multiple
+				// copies of the feature are visible, the popup appears
+				// over the copy being pointed to.
+				if (['mercator', 'equirectangular'].includes(map.getProjection().name)) {
+					while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+						coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+					}
+				}
+				map.flyTo({
+					center: coordinates,
+					zoom: 5,
+					duration: 5000, // Animate over 5 seconds
+					essential: true // This animation is considered essential with
+					//respect to prefers-reduced-motion
+				});
+				new mapboxgl.Popup()
+					.setLngLat(coordinates)
+					.setHTML(description)
+					.addTo(map);
+            }
+        });
+
+        // Clicking on the map will deselect the selected feature
+        map.addInteraction('map-click', {
+            type: 'click',
+            handler: () => {
+                if (selectedFeature) {
+                    map.setFeatureState(selectedFeature, { selected: false });
+                    selectedFeature = null;
+                    card.style.display = 'none';
+                }
+            }
+        });
+
+        // Hovering over a feature will highlight it
+        map.addInteraction('mouseenter', {
+            type: 'mouseenter',
+            target: { layerId: 'museum' },
+            handler: ({ feature }) => {
+                map.setFeatureState(feature, { highlight: true });
+                map.getCanvas().style.cursor = 'pointer';
+            }
+        });
+
+        // Moving the mouse away from a feature will remove the highlight
+        map.addInteraction('mouseleave', {
+            type: 'mouseleave',
+            target: { layerId: 'museum' },
+            handler: ({ feature }) => {
+                map.setFeatureState(feature, { highlight: false });
+                map.getCanvas().style.cursor = '';
+                return false;
+            }
+        });
+	});
+</script>
+
+</body>
+</html>
