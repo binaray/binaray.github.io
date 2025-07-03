@@ -1,20 +1,42 @@
 class ParticleSystem {
     constructor(context, data, userInput, viewerParameters) {
+		this.enabled = userInput.showCurrents;
         this.context = context;
         this.data = data;
         this.userInput = userInput;
         this.viewerParameters = viewerParameters;
 
-        this.particlesComputing = new ParticlesComputing(
-            this.context, this.data,
-            this.userInput, this.viewerParameters
-        );
-        this.particlesRendering = new ParticlesRendering(
-            this.context, this.data,
-            this.userInput, this.viewerParameters,
-            this.particlesComputing
-        );
+        this.enable(this.enabled);
     }
+	
+	enable(isEnabled){
+		if (isEnabled){
+			if (this.enabled) return;
+			this.particlesComputing = new ParticlesComputing(
+				this.context, this.data,
+				this.userInput, this.viewerParameters
+			);
+			this.particlesRendering = new ParticlesRendering(
+				this.context, this.data,
+				this.userInput, this.viewerParameters,
+				this.particlesComputing
+			);
+		}
+		else {
+			if (!this.enabled) return;
+			this.clearFramebuffers();
+			this.particlesComputing.destroyParticlesTextures();
+			Object.keys(this.particlesComputing.windTextures).forEach((key) => {
+				this.particlesComputing.windTextures[key].destroy();
+			});
+
+			Object.keys(this.particlesRendering.framebuffers).forEach((key) => {
+				this.particlesRendering.framebuffers[key].destroy();
+			});
+		}
+		this.enabled = isEnabled;
+	}
+
 
     canvasResize(context) {
         this.particlesComputing.destroyParticlesTextures();
@@ -72,6 +94,11 @@ class ParticleSystem {
     }
 
     applyUserInput(userInput) {
+		console.log("showCurrents: "+userInput.showCurrents+" enabled: "+ this.enabled);
+		this.enable(userInput.showCurrents);
+		
+		if (!this.enabled) return;
+		
         var maxParticlesChanged = false;
         if (this.userInput.maxParticles != userInput.maxParticles) {
             maxParticlesChanged = true;

@@ -164,7 +164,6 @@ var DataProcess = (function () {
         // await loadNetCDF(ncFilePath);
         // await loadJson(fileOptions.dataDirectory + 'oceanVel_0103_past1000_res250km_depth5m_1750-01-16.json');
 		await loadMsgPack(fileOptions.dataDirectory + 'wind_184912.bin');
-		window.data = data;
         return data;
     }
 

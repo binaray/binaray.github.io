@@ -56,9 +56,11 @@ class Wind3D {
 
         DataProcess.loadData().then(
             (data) => {
+				let userInput = this.panel.getUserInput();
                 this.particleSystem = new ParticleSystem(this.scene.context, data,
-                    this.panel.getUserInput(), this.viewerParameters);
-                this.addPrimitives();
+                    userInput, this.viewerParameters);
+                if (userInput.showCurrents) this.addPrimitives();
+				this.particleSystemActive = userInput.showCurrents;
 
                 this.setupEventListeners();
 
@@ -68,7 +70,6 @@ class Wind3D {
             });
 
         this.imageryLayers = this.viewer.imageryLayers;
-        this.setGlobeLayer(this.panel.getUserInput());
     }
 	
 	addLocationClusters() {
@@ -122,15 +123,20 @@ class Wind3D {
 			}).catch((e) => console.error(e));		
 	}
 	
-    addPrimitives() {
-		this.systemPrimitives = new Cesium.PrimitiveCollection();
-		this.systemPrimitives.add(this.particleSystem.particlesComputing.primitives.calculateSpeed);
-		this.systemPrimitives.add(this.particleSystem.particlesComputing.primitives.updatePosition);
-		this.systemPrimitives.add(this.particleSystem.particlesComputing.primitives.postProcessingPosition);
-		this.systemPrimitives.add(this.particleSystem.particlesRendering.primitives.segments);
-		this.systemPrimitives.add(this.particleSystem.particlesRendering.primitives.trails);
-		this.systemPrimitives.add(this.particleSystem.particlesRendering.primitives.screen);
-		this.scene.primitives.add(this.systemPrimitives);
+    addPrimitives(isShown) {
+		if (!this.systemPrimitives)
+		{
+			this.systemPrimitives = new Cesium.PrimitiveCollection();
+			this.scene.primitives.add(this.systemPrimitives);
+		}
+		if (isShown){
+			this.systemPrimitives.add(this.particleSystem.particlesComputing.primitives.calculateSpeed);
+			this.systemPrimitives.add(this.particleSystem.particlesComputing.primitives.updatePosition);
+			this.systemPrimitives.add(this.particleSystem.particlesComputing.primitives.postProcessingPosition);
+			this.systemPrimitives.add(this.particleSystem.particlesRendering.primitives.segments);
+			this.systemPrimitives.add(this.particleSystem.particlesRendering.primitives.trails);
+			this.systemPrimitives.add(this.particleSystem.particlesRendering.primitives.screen);
+		}
         // the order of primitives.add() should respect the dependency of primitives
         // this.scene.primitives.add(this.particleSystem.particlesComputing.primitives.calculateSpeed);
         // this.scene.primitives.add(this.particleSystem.particlesComputing.primitives.updatePosition);
@@ -140,6 +146,13 @@ class Wind3D {
         // this.scene.primitives.add(this.particleSystem.particlesRendering.primitives.trails);
         // this.scene.primitives.add(this.particleSystem.particlesRendering.primitives.screen);
     }
+	
+	showPrimitives(isShown) {
+		if (this.systemPrimitives) {
+			this.systemPrimitives.show = isShown;
+			if (!isShown) this.systemPrimitives.removeAll();	
+		}
+	}
 
     updateViewerParameters() {
         var viewRectangle = this.camera.computeViewRectangle(this.scene.globe.ellipsoid);
@@ -160,50 +173,19 @@ class Wind3D {
         }
     }
 
-    setGlobeLayer(userInput) {
-        this.viewer.imageryLayers.removeAll();
-        this.viewer.terrainProvider = new Cesium.EllipsoidTerrainProvider();
-
-        var globeLayer = userInput.globeLayer;
-        switch (globeLayer.type) {
-            case "NaturalEarthII": {
-                this.viewer.imageryLayers.add(
-                    Cesium.ImageryLayer.fromProviderAsync(
-                        Cesium.TileMapServiceImageryProvider.fromUrl(
-                            Cesium.buildModuleUrl("Assets/Textures/NaturalEarthII"),
-                        )
-                    )
-                );
-                break;
-            }
-            case "WMS": {
-                this.viewer.imageryLayers.addImageryProvider(new Cesium.WebMapServiceImageryProvider({
-                    url: userInput.WMS_URL,
-                    layers: globeLayer.layer,
-                    parameters: {
-                        ColorScaleRange: globeLayer.ColorScaleRange
-                    }
-                }));
-                break;
-            }
-            case "WorldTerrain": {
-                this.viewer.imageryLayers.add(
-                    Cesium.ImageryLayer.fromProviderAsync(Cesium.IonImageryProvider.fromAssetId(3954))
-                );
-                this.viewer.scene.setTerrain(Cesium.Terrain.fromWorldTerrain());
-                break;
-            }
-        }
-    }
-
     setupEventListeners() {
         const that = this;
 
         this.camera.moveStart.addEventListener(function () {
-            that.systemPrimitives.show = false;
+			let userInput = that.panel.getUserInput();
+            if (!userInput.showCurrents) return;
+			that.systemPrimitives.show = false;
         });
 
         this.camera.moveEnd.addEventListener(function () {
+			let userInput = that.panel.getUserInput();
+            if (!userInput.showCurrents) return;
+			
             that.updateViewerParameters();
             that.particleSystem.applyViewerParameters(that.viewerParameters);
             that.systemPrimitives.show = true;
@@ -211,25 +193,28 @@ class Wind3D {
 
         var resized = false;
         window.addEventListener("resize", function () {
+			let userInput = that.panel.getUserInput();
+			if (!userInput.showCurrents) return;
             resized = true;
-            that.scene.primitives.show = false;
-            that.scene.primitives.removeAll();
+            that.systemPrimitives.show = false;
+            that.systemPrimitives.removeAll();
         });
 
         this.scene.preRender.addEventListener(function () {
-            if (resized) {
+			let userInput = that.panel.getUserInput();
+            if (resized && userInput.showCurrents) {
                 that.particleSystem.canvasResize(that.scene.context);
                 resized = false;
-                that.addPrimitives();
-                that.scene.primitives.show = true;
+                that.addPrimitives(true);
+                that.systemPrimitives.show = true;
             }
         });
-
+		
         window.addEventListener('particleSystemOptionsChanged', function () {
-            that.particleSystem.applyUserInput(that.panel.getUserInput());
-        });
-        window.addEventListener('layerOptionsChanged', function () {
-            that.setGlobeLayer(that.panel.getUserInput());
+			let userInput = that.panel.getUserInput();
+			that.showPrimitives(userInput.showCurrents);
+            that.particleSystem.applyUserInput(userInput);
+			that.addPrimitives(userInput.showCurrents);
         });
     }
 
