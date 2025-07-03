@@ -2,8 +2,12 @@ var demo = Cesium.defaultValue(demo, false);
 
 const fileOptions = {
     dataDirectory: 'data/',
-    dataFile: "demo.nc",
     glslDirectory: 'js/glsl/'
+}
+
+const dataFiles = {
+	Winds: "wind_184912.bin",
+	Ocean: "ocean_1650.bin"
 }
 
 const defaultParticleSystemOptions = {
@@ -41,12 +45,12 @@ class Panel {
 
         window.onload = function () {
             that.gui = new dat.GUI({ autoPlace: false });
-            // gui.add(that, 'maxParticles', 1, 256 * 256, 1).onFinishChange(onParticleSystemOptionsChange);
+            that.gui.add(that, 'maxParticles', 1, 256 * 256, 1).onFinishChange(onParticleSystemOptionsChange);
             // gui.add(that, 'particleHeight', 1, 10000, 1).onFinishChange(onParticleSystemOptionsChange);
             // gui.add(that, 'fadeOpacity', 0.90, 0.999, 0.001).onFinishChange(onParticleSystemOptionsChange);
             // gui.add(that, 'dropRate', 0.0, 0.1).onFinishChange(onParticleSystemOptionsChange);
             // gui.add(that, 'dropRateBump', 0, 0.2).onFinishChange(onParticleSystemOptionsChange);
-            // gui.add(that, 'speedFactor', 0.05, 8).onFinishChange(onParticleSystemOptionsChange);
+            that.gui.add(that, 'speedFactor', 0.05, 8).onFinishChange(onParticleSystemOptionsChange);
             // gui.add(that, 'lineWidth', 0.01, 16.0).onFinishChange(onParticleSystemOptionsChange);
 
             // gui.add(that, 'layerToShow', layerNames).onFinishChange(onLayerOptionsChange);
@@ -76,7 +80,7 @@ class Panel {
             globeLayer: this.globeLayer,
             WMS_URL: this.WMS_URL,
 			showCurrents: this.showCurrents,
-			currentType: this.currentType
+			dataFile: dataFiles[this.currentType]
         }
     }
 }

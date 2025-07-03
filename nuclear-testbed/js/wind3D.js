@@ -53,14 +53,13 @@ class Wind3D {
 		this.viewer.scene.screenSpaceCameraController.inertiaZoom = 0;
 		
 		this.addLocationClusters();
-
-        DataProcess.loadData().then(
+		
+		let userInput = this.panel.getUserInput();
+        DataProcess.loadData(userInput.dataFile).then(
             (data) => {
-				let userInput = this.panel.getUserInput();
                 this.particleSystem = new ParticleSystem(this.scene.context, data,
                     userInput, this.viewerParameters);
                 if (userInput.showCurrents) this.addPrimitives();
-				this.particleSystemActive = userInput.showCurrents;
 
                 this.setupEventListeners();
 
@@ -129,7 +128,7 @@ class Wind3D {
 			this.systemPrimitives = new Cesium.PrimitiveCollection();
 			this.scene.primitives.add(this.systemPrimitives);
 		}
-		if (isShown){
+		if (this.systemPrimitives.length == 0 && isShown){
 			this.systemPrimitives.add(this.particleSystem.particlesComputing.primitives.calculateSpeed);
 			this.systemPrimitives.add(this.particleSystem.particlesComputing.primitives.updatePosition);
 			this.systemPrimitives.add(this.particleSystem.particlesComputing.primitives.postProcessingPosition);
@@ -205,16 +204,34 @@ class Wind3D {
             if (resized && userInput.showCurrents) {
                 that.particleSystem.canvasResize(that.scene.context);
                 resized = false;
-                that.addPrimitives(true);
+                that.addPrimitives(userInput.showCurrents);
                 that.systemPrimitives.show = true;
             }
         });
 		
         window.addEventListener('particleSystemOptionsChanged', function () {
 			let userInput = that.panel.getUserInput();
-			that.showPrimitives(userInput.showCurrents);
-            that.particleSystem.applyUserInput(userInput);
-			that.addPrimitives(userInput.showCurrents);
+			if (userInput.dataFile != that.particleSystem.userInput.dataFile){				
+				// turn off system first
+				userInput.showCurrents = false;
+				that.showPrimitives(userInput.showCurrents);
+				that.particleSystem.applyUserInput(userInput);
+				
+				DataProcess.loadData(userInput.dataFile).then(
+				(data) => {
+					that.particleSystem = new ParticleSystem(that.scene.context, data,
+						userInput, that.viewerParameters);
+					userInput.showCurrents = true;
+					that.showPrimitives(userInput.showCurrents);
+					that.particleSystem.applyUserInput(userInput);
+					that.addPrimitives(userInput.showCurrents);
+				});
+			}
+			else {
+				that.showPrimitives(userInput.showCurrents);
+				that.particleSystem.applyUserInput(userInput);
+				that.addPrimitives(userInput.showCurrents);
+			}
         });
     }
 

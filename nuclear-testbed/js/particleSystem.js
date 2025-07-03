@@ -94,7 +94,6 @@ class ParticleSystem {
     }
 
     applyUserInput(userInput) {
-		console.log("showCurrents: "+userInput.showCurrents+" enabled: "+ this.enabled);
 		this.enable(userInput.showCurrents);
 		
 		if (!this.enabled) return;
