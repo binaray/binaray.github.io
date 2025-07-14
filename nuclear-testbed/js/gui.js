@@ -27,6 +27,7 @@ class Panel {
 		this.showCurrents = false;
 		var currentOptions = ["Winds", "Ocean"];
 		this.currentType = currentOptions[0];
+		this.controllers = {};
 		
         this.maxParticles = defaultParticleSystemOptions.maxParticles;
         this.particleHeight = defaultParticleSystemOptions.particleHeight;
@@ -36,26 +37,40 @@ class Panel {
         this.speedFactor = defaultParticleSystemOptions.speedFactor;
         this.lineWidth = defaultParticleSystemOptions.lineWidth;
 
+		
+        const that = this;
+		
         var onParticleSystemOptionsChange = function () {
             var event = new CustomEvent('particleSystemOptionsChanged');
             window.dispatchEvent(event);
         }
 
-        const that = this;
+        var onCurrentsChange = function () {
+            if (that.currentType === currentOptions[0])
+			{
+				that.controllers['maxParticles'].setValue(4096);
+				that.controllers['speedFactor'].setValue(1);
+			}
+			else{
+				that.controllers['maxParticles'].setValue(8192);
+				that.controllers['speedFactor'].setValue(8);
+			}
+			onParticleSystemOptionsChange();
+        }
 
         window.onload = function () {
             that.gui = new dat.GUI({ autoPlace: false });
-            that.gui.add(that, 'maxParticles', 1, 256 * 256, 1).onFinishChange(onParticleSystemOptionsChange);
+            that.controllers['maxParticles'] = that.gui.add(that, 'maxParticles', 1, 256 * 256, 1).onFinishChange(onParticleSystemOptionsChange);
             // gui.add(that, 'particleHeight', 1, 10000, 1).onFinishChange(onParticleSystemOptionsChange);
             // gui.add(that, 'fadeOpacity', 0.90, 0.999, 0.001).onFinishChange(onParticleSystemOptionsChange);
             // gui.add(that, 'dropRate', 0.0, 0.1).onFinishChange(onParticleSystemOptionsChange);
             // gui.add(that, 'dropRateBump', 0, 0.2).onFinishChange(onParticleSystemOptionsChange);
-            that.gui.add(that, 'speedFactor', 0.05, 8).onFinishChange(onParticleSystemOptionsChange);
+            that.controllers['speedFactor'] = that.gui.add(that, 'speedFactor', 0.05, 8).onFinishChange(onParticleSystemOptionsChange);
             // gui.add(that, 'lineWidth', 0.01, 16.0).onFinishChange(onParticleSystemOptionsChange);
 
             // gui.add(that, 'layerToShow', layerNames).onFinishChange(onLayerOptionsChange);
-			that.gui.add(that, 'showCurrents').onFinishChange(onParticleSystemOptionsChange);
-			that.gui.add(that, 'currentType', currentOptions).onFinishChange(onParticleSystemOptionsChange);
+			that.controllers['showCurrents'] = that.gui.add(that, 'showCurrents').onFinishChange(onParticleSystemOptionsChange);
+			that.controllers['currentType'] = that.gui.add(that, 'currentType', currentOptions).onFinishChange(onCurrentsChange);
 			
             var panelContainer = document.getElementsByClassName('cesium-widget').item(0);
             that.gui.domElement.classList.add('myPanel');

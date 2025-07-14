@@ -1,5 +1,7 @@
 class ParticlesRendering {
     constructor(context, data, userInput, viewerParameters, particlesComputing) {
+		this.maxMagnitude = 1;
+
         this.createRenderingTextures(context, data);
         this.createRenderingFramebuffers(context);
         this.createRenderingPrimitives(context, userInput, viewerParameters, particlesComputing);
@@ -130,6 +132,12 @@ class ParticlesRendering {
                     },
                     postProcessingPosition: function () {
                         return particlesComputing.particlesTextures.postProcessingPosition;
+                    },
+                    particlesSpeed: function () {
+                        return particlesComputing.particlesTextures.particlesSpeed;
+                    },
+                    maxMagnitude: function () {
+                        return that.maxMagnitude;
                     },
                     aspect: function () {
                         return context.drawingBufferWidth / context.drawingBufferHeight;

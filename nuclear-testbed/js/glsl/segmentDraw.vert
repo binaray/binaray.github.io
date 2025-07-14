@@ -12,6 +12,8 @@ uniform float aspect;
 uniform float pixelSize;
 uniform float lineWidth;
 
+out vec2 particleIndex;
+
 struct adjacentPoints {
     vec4 previous;
     vec4 current;
@@ -103,7 +105,7 @@ vec4 calculateOffsetOnMiterDirection(adjacentPoints projectedCoordinates, float 
 }
 
 void main() {
-    vec2 particleIndex = st;
+    particleIndex = st;
 
     vec3 previousPosition = texture(previousParticlesPosition, particleIndex).rgb;
     vec3 currentPosition = texture(currentParticlesPosition, particleIndex).rgb;
